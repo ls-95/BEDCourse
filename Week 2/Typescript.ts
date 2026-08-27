@@ -9,6 +9,7 @@ const isEnrolled: boolean = true;
 const describeStudent = (firstName: string, age: number) => {
   return `${firstName} is ${age} years old${isEnrolled ? " and is a student at Sundsgården!" : "."}`;
 };
+
 console.log(describeStudent(firstName, age));
 
 //Greeting with Options:
@@ -27,6 +28,7 @@ console.log(formalGreeting("Bob"));
 const ages: number[] = [5, 25, 34, 44, 62, 83];
 
 const agesInFiveYears: number[] = ages.map((a) => a + 5);
+
 console.log(agesInFiveYears);
 
 //Filtering Names:
@@ -51,11 +53,13 @@ const names: string[] = [
 ];
 
 const shortNames: string[] = names.filter((n) => n.length <= 4);
+
 console.log(
   `The names that are 4 or less characters long are: ${shortNames.join(", ")}`,
 );
 
 const longNames: string[] = names.filter((n) => n.length >= 8);
+
 console.log(
   `The names that are 8 or more characters long are: ${longNames.join(", ")}`,
 );
@@ -88,12 +92,14 @@ const shortest = findShortestName(namesLength);
 
 //Shortest name(s)
 const shortestNames: string[] = names.filter((n) => n.length === shortest);
+
 console.log(
   `The shortest ${shortestNames.length === 1 ? "name" : "names"} ${shortestNames.length === 1 ? "is" : "are"}: ${shortestNames.map((n) => n).join(", ")}.`,
 );
 
 //Longest name(s)
 const longestNames: string[] = names.filter((n) => n.length === longestLength);
+
 console.log(
   `The longest ${longestNames.length === 1 ? "name" : "names"} ${longestNames.length === 1 ? "is" : "are"}: ${longestNames.map((n) => n).join(", ")}.`,
 );
@@ -104,6 +110,7 @@ const scores: number[] = [15, 82, 47, 56, 92, 43, 4, 91, 33, 76, 29, 55, 100];
 
 //Keep scores that are 50 or above (passing scores)
 const passingScores = scores.filter((s) => s >= 50).map((s) => s);
+
 console.log(passingScores);
 console.log(
   `Out of ${scores.length} students, ${passingScores.length} passed!`,
@@ -135,6 +142,7 @@ console.log(allGradeScores);
 
 //How many students failed
 const failedScores = scores.filter((s) => s < 50);
+
 console.log(
   `Out of ${scores.length} students, ${failedScores.length} failed..`,
 );
@@ -142,6 +150,7 @@ console.log(
 //SKILL 3: Interfaces
 
 //Book Interface
+
 interface Book {
   title: string;
   author: string;
@@ -157,6 +166,7 @@ const myBook: Book = {
 console.log(myBook.title);
 
 //Nested & Optional Properties
+
 interface Address {
   city: string;
   postalCode?: string;
@@ -320,18 +330,22 @@ const products = [
 //log products under 1000
 const underThousandKronor: Product[] = products.filter((p) => p.price < 1000);
 const numberOfProductsUnderPrice: number = underThousandKronor.length;
+
 console.log(underThousandKronor);
 console.log(
   `There ${numberOfProductsUnderPrice === 1 ? "is" : "are"} ${numberOfProductsUnderPrice} ${numberOfProductsUnderPrice === 1 ? "product" : "products"} that ${numberOfProductsUnderPrice === 1 ? "is" : "are"} under 1000kr`,
 );
 
-//log name of products that have the tag 'work'
+//Filter + Map
+
 const productWithTagWork: string[] = products
   .filter((p) => p.tags.includes("work"))
   .map((p) => p.productName);
 const numberOfProductsWithTag: number = products.filter((p) =>
   p.tags.includes("work"),
 ).length;
+
+//log names of all products tagged 'work'
 console.log(productWithTagWork);
 console.log(
   `There ${numberOfProductsWithTag === 1 ? "is" : "are"} ${numberOfProductsWithTag} ${numberOfProductsWithTag === 1 ? "product" : "products"} that ${numberOfProductsWithTag === 1 ? "has" : "have"} the tag 'work': ${productWithTagWork.join(", ")}`,
@@ -339,8 +353,15 @@ console.log(
 
 //Challenge (optional) Filter + Map + Join
 
+const productWithMultiTags: number = products.filter(
+  (p) => p.tags.length > 1,
+).length;
+console.log(productWithMultiTags);
 const multipleTags = products
   .filter((p) => p.tags.length > 1)
   .map((p) => `${p.productName} (${p.price}kr)`)
   .join(", ");
-console.log(multipleTags);
+
+console.log(
+  `The ${productWithMultiTags === 1 ? "product" : "products"} with multiple tags ${productWithMultiTags === 1 ? "is" : "are"}: ${multipleTags}`,
+);
