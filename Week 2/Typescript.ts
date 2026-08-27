@@ -140,3 +140,207 @@ console.log(
 );
 
 //SKILL 3: Interfaces
+
+//Book Interface
+interface Book {
+  title: string;
+  author: string;
+  pages: number;
+}
+
+const myBook: Book = {
+  title: "Everyone in My Family Has Killed Someone",
+  author: "Benjamin Stevensson",
+  pages: 385,
+};
+
+console.log(myBook.title);
+
+//Nested & Optional Properties
+interface Address {
+  city: string;
+  postalCode?: string;
+}
+
+interface Person {
+  name: string;
+  age: number;
+  address: Address;
+}
+
+const santaClaus: Person = {
+  name: "Saint Nicholas",
+  age: 1756,
+  address: {
+    city: "North Pole",
+    postalCode: "88888",
+  },
+};
+
+console.log(santaClaus.address.city);
+
+const theEasterBunny: Person = {
+  name: "Easter Rabbit",
+  age: 450,
+  address: {
+    city: "Easter Island",
+  },
+};
+
+console.log(theEasterBunny.address.city);
+
+//Challenge (optional) Interface with a Typed Function
+
+interface Movie {
+  id: number;
+  title: string;
+  rating: number;
+  genres: string[];
+}
+
+const movies: Movie[] = [
+  {
+    id: 1,
+    title: "Back To The Future",
+    rating: 10,
+    genres: [
+      "comedy",
+      "science fiction",
+      "romance",
+      "drama",
+      "adventure",
+      "action",
+    ],
+  },
+  {
+    id: 2,
+    title: "Dodgeball: A True Underdog Story",
+    rating: 8,
+    genres: ["comedy", "action", "drama", "sports"],
+  },
+  {
+    id: 3,
+    title: "Monty Python and the Holy Grail",
+    rating: 9,
+    genres: ["comedy", "fantasy", "action", "adventure"],
+  },
+  {
+    id: 4,
+    title: "The Green Mile",
+    rating: 9.5,
+    genres: [
+      "horror",
+      "mystery",
+      "melodrama",
+      "comedy",
+      "fantasy",
+      "thriller",
+      "drama",
+      "supernatural",
+      "detective fiction",
+    ],
+  },
+];
+
+//returns movies containing specific genre
+const getMoviesByGenre = (movies: Movie[], genre: string) => {
+  const filterMovies = movies.filter((m) => m.genres.includes(genre));
+  return filterMovies;
+};
+
+let genre = "drama";
+let result: Movie[] = getMoviesByGenre(movies, genre);
+const movieResults = result.map((m) => m.title);
+
+//logs movie titles with drama as a genre
+console.log(
+  `The ${result.length === 1 ? "movie" : "movies"} with the genre of ${genre} ${result.length === 1 ? "is" : "are"}: ${movieResults.join(", ")}`,
+);
+
+movies.push({
+  id: 5,
+  title: "Rental Family",
+  rating: 9,
+  genres: ["comedy", "drama"],
+});
+
+genre = "comedy";
+result = getMoviesByGenre(movies, genre);
+const newMovieResults = result.map((m) => m.title);
+
+//logs movie titles with comedy as a genre
+console.log(
+  `The ${result.length === 1 ? "movie" : "movies"} with the genre of ${genre} ${result.length === 1 ? "is" : "are"}: ${newMovieResults.join(", ")}`,
+);
+
+//SKILL 4: Chaining Array Methods on Interface Data
+
+//Filter only
+
+interface Product {
+  id: number;
+  productName: string;
+  price: number;
+  tags: string[];
+}
+
+const products = [
+  {
+    id: 1,
+    productName: "USB-C Cable",
+    price: 49,
+    tags: ["electronics", "accessory"],
+  },
+  {
+    id: 2,
+    productName: "Coffee Mug",
+    price: 129,
+    tags: ["kitchen", "home", "work"],
+  },
+  {
+    id: 3,
+    productName: "Wireless Mouse",
+    price: 299,
+    tags: ["electronics", "accessory"],
+  },
+  {
+    id: 4,
+    productName: "Noise Cancelling Headphones",
+    price: 990,
+    tags: ["electronics", "audio"],
+  },
+  {
+    id: 5,
+    productName: "Standing Desk",
+    price: 3499,
+    tags: ["furniture", "work"],
+  },
+];
+
+//log products under 1000
+const underThousandKronor: Product[] = products.filter((p) => p.price < 1000);
+const numberOfProductsUnderPrice: number = underThousandKronor.length;
+console.log(underThousandKronor);
+console.log(
+  `There ${numberOfProductsUnderPrice === 1 ? "is" : "are"} ${numberOfProductsUnderPrice} ${numberOfProductsUnderPrice === 1 ? "product" : "products"} that ${numberOfProductsUnderPrice === 1 ? "is" : "are"} under 1000kr`,
+);
+
+//log name of products that have the tag 'work'
+const productWithTagWork: string[] = products
+  .filter((p) => p.tags.includes("work"))
+  .map((p) => p.productName);
+const numberOfProductsWithTag: number = products.filter((p) =>
+  p.tags.includes("work"),
+).length;
+console.log(productWithTagWork);
+console.log(
+  `There ${numberOfProductsWithTag === 1 ? "is" : "are"} ${numberOfProductsWithTag} ${numberOfProductsWithTag === 1 ? "product" : "products"} that ${numberOfProductsWithTag === 1 ? "has" : "have"} the tag 'work': ${productWithTagWork.join(", ")}`,
+);
+
+//Challenge (optional) Filter + Map + Join
+
+const multipleTags = products
+  .filter((p) => p.tags.length > 1)
+  .map((p) => `${p.productName} (${p.price}kr)`)
+  .join(", ");
+console.log(multipleTags);
