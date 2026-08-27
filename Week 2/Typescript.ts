@@ -6,7 +6,7 @@ const firstName: string = "Laetitia";
 const age: number = 31;
 const isEnrolled: boolean = true;
 
-const describeStudent = (firstName: string, age: number) => {
+const describeStudent = (firstName: string, age: number): string => {
   return `${firstName} is ${age} years old${isEnrolled ? " and is a student at Sundsgården!" : "."}`;
 };
 
@@ -14,7 +14,7 @@ console.log(describeStudent(firstName, age));
 
 //Greeting with Options:
 
-const formalGreeting = (name: string, formal?: boolean) => {
+const formalGreeting = (name: string, formal?: boolean): string => {
   return formal ? `Good day, ${name}.` : `Hi ${name}!`;
 };
 
@@ -52,13 +52,13 @@ const names: string[] = [
   "Evangeline",
 ];
 
-const shortNames: string[] = names.filter((n) => n.length <= 4);
+const shortNames = names.filter((n) => n.length <= 4);
 
 console.log(
   `The names that are 4 or less characters long are: ${shortNames.join(", ")}`,
 );
 
-const longNames: string[] = names.filter((n) => n.length >= 8);
+const longNames = names.filter((n) => n.length >= 8);
 
 console.log(
   `The names that are 8 or more characters long are: ${longNames.join(", ")}`,
@@ -79,7 +79,7 @@ for (let i: number = 0; i < names.length; i++) {
 }
 
 //Find the shortest name(s)
-const findShortestName = (numbers: number[]) => {
+const findShortestName = (numbers: number[]): number => {
   let minNumber: number = namesLength[0] ?? 0;
   for (let num of numbers) {
     if (num < minNumber) {
@@ -91,14 +91,14 @@ const findShortestName = (numbers: number[]) => {
 const shortest = findShortestName(namesLength);
 
 //Shortest name(s)
-const shortestNames: string[] = names.filter((n) => n.length === shortest);
+const shortestNames = names.filter((n) => n.length === shortest);
 
 console.log(
   `The shortest ${shortestNames.length === 1 ? "name" : "names"} ${shortestNames.length === 1 ? "is" : "are"}: ${shortestNames.map((n) => n).join(", ")}.`,
 );
 
 //Longest name(s)
-const longestNames: string[] = names.filter((n) => n.length === longestLength);
+const longestNames = names.filter((n) => n.length === longestLength);
 
 console.log(
   `The longest ${longestNames.length === 1 ? "name" : "names"} ${longestNames.length === 1 ? "is" : "are"}: ${longestNames.map((n) => n).join(", ")}.`,
@@ -253,13 +253,13 @@ const movies: Movie[] = [
 ];
 
 //returns movies containing specific genre
-const getMoviesByGenre = (movies: Movie[], genre: string) => {
+const getMoviesByGenre = (movies: Movie[], genre: string): Movie[] => {
   const filterMovies = movies.filter((m) => m.genres.includes(genre));
   return filterMovies;
 };
 
 let genre = "drama";
-let result: Movie[] = getMoviesByGenre(movies, genre);
+let result = getMoviesByGenre(movies, genre);
 const movieResults = result.map((m) => m.title);
 
 //logs movie titles with drama as a genre
@@ -328,7 +328,7 @@ const products = [
 ];
 
 //log products under 1000
-const underThousandKronor: Product[] = products.filter((p) => p.price < 1000);
+const underThousandKronor = products.filter((p) => p.price < 1000);
 const numberOfProductsUnderPrice: number = underThousandKronor.length;
 
 console.log(underThousandKronor);
@@ -341,6 +341,7 @@ console.log(
 const productWithTagWork: string[] = products
   .filter((p) => p.tags.includes("work"))
   .map((p) => p.productName);
+
 const numberOfProductsWithTag: number = products.filter((p) =>
   p.tags.includes("work"),
 ).length;
