@@ -294,7 +294,7 @@ interface Product {
   tags: string[];
 }
 
-const products = [
+const products: Product[] = [
   {
     id: 1,
     productName: "USB-C Cable",
