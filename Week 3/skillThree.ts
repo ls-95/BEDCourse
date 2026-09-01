@@ -5,13 +5,31 @@ enum Colour {
   Blue = "Blue",
 }
 
-const showColour = (colour: Colour) => {
+const showColour = (colour: Colour): string => {
   return `You chose ${colour}`;
 };
 
 console.log(showColour(Colour.Red));
 console.log(showColour(Colour.Green));
 console.log(showColour(Colour.Blue));
+
+enum Colours {
+  Red,
+  Green,
+  Blue,
+}
+
+const showColours = (colours: Colours): string => {
+  return colours === Colours.Red
+    ? "You have picked the colour Red"
+    : colours === Colours.Green
+      ? "You have picked the colour Green"
+      : "You have picked the colour Blue";
+};
+
+console.log(showColours(Colours.Red));
+console.log(showColours(Colours.Green));
+console.log(showColours(Colours.Blue));
 
 //Pizza Order
 enum PizzaSize {
@@ -20,7 +38,7 @@ enum PizzaSize {
   Large = "Large",
 }
 
-const orderPizza = (pizzaSize: PizzaSize) => {
+const orderPizza = (pizzaSize: PizzaSize): string => {
   return `You ordered a ${pizzaSize} pizza`;
 };
 
