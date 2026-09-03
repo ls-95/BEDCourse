@@ -1,3 +1,5 @@
+//Hello Callback
+
 type helloFunction = (message: string) => void;
 
 const greeting = (hello: helloFunction): void => {
