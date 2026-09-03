@@ -3,7 +3,7 @@
 type numbersFunction = (a: number, b: number) => void;
 
 const addNumbers = (numbers: numbersFunction) => {
-  numbers(2, 5);
+  numbers(123, 321);
 };
 
 const numbers = (a: number, b: number): void => {
