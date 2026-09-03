@@ -1,8 +1,8 @@
 //Pizza Order
 
-type orderStatusFunction = (status: string) => void;
+type OrderStatusFunction = (status: string) => void;
 
-const orderPizza = (orderStatus: orderStatusFunction): void => {
+const orderPizza = (orderStatus: OrderStatusFunction): void => {
   console.log(
     "You have ordered a pizza! Your pizza will be ready in record time!",
   );

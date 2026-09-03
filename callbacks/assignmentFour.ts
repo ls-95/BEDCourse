@@ -12,11 +12,11 @@
 
 // transformToUpperCase(sentence);
 
-type displaySentenceFunction = (sentence: string) => void;
+type DisplaySentenceFunction = (sentence: string) => void;
 
 const transformToUpperCase = (
   sentence: string,
-  displaySentence: displaySentenceFunction,
+  displaySentence: DisplaySentenceFunction,
 ): void => {
   displaySentence(sentence.toUpperCase()); //Global Unicode mapping
   // dislpaySentence(sentence.toLocaleUpperCase("fr-FR")); -> checks locale rule first if should override global mapping - fr-FR for french

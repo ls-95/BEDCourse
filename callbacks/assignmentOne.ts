@@ -1,8 +1,8 @@
 //Hello Callback
 
-type helloFunction = (message: string) => void;
+type HelloFunction = (message: string) => void;
 
-const greeting = (hello: helloFunction): void => {
+const greeting = (hello: HelloFunction): void => {
   hello("Hello from callback!");
 };
 

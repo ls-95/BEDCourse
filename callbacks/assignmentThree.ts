@@ -12,9 +12,9 @@
 
 // addNumbers(numbers);
 
-type numbersFunction = (addition: number) => void;
+type NumbersFunction = (addition: number) => void;
 
-const addNumbers = (a: number, b: number, numbers: numbersFunction): void => {
+const addNumbers = (a: number, b: number, numbers: NumbersFunction): void => {
   numbers(a + b);
 };
 
