@@ -3,6 +3,9 @@
 type DownloadFunction = (url: string) => void;
 
 const printUrl = (url: string, downloadFunction: DownloadFunction): void => {
+  console.log(
+    "You will soon be able to download data from a url that will be provided",
+  );
   setTimeout(() => {
     downloadFunction(url);
   }, 2000);
