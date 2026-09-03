@@ -1,15 +1,15 @@
 //Delayed Greeting
 
-type displayGreetingFunction = (message: string) => void;
+type greetingMessageFunction = (message: string) => void;
 
-const sayHelloLater = (displayGreeting: displayGreetingFunction) => {
+const sayHelloLater = (displayGreeting: greetingMessageFunction) => {
   setTimeout(() => {
     displayGreeting("Hi, I am late!");
   }, 2000);
 };
 
-const displayGreeting = (message: string): void => {
+const greetingMessage = (message: string): void => {
   console.log(message);
 };
 
-sayHelloLater(displayGreeting);
+sayHelloLater(greetingMessage);
