@@ -75,7 +75,7 @@ myPromise2
     console.log(message);
   })
   .catch((error) => {
-    console.log(error);
+    console.log("Something went wrong: " + error);
   });
 
 //A Promise that is pending means that the executor runs and it is attempting to perform a job. No decision has been made.
