@@ -49,7 +49,7 @@ delayedGreeting("Sam", 1500, (): void => {
 
 //I predict that the one second timer will print the logs first and then two seconds afterwards, the three second logs will print.
 
-//The prediction was correct, this is because, I believe, that they are being called seperately so they do not interfer with each other.
+//The prediction was correct, this is because they start simultaneously and the first timeOut has a delay of one second and the second of three seconds.
 
 type DelayedMessage = () => void;
 

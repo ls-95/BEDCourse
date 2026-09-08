@@ -2,16 +2,19 @@
 
 type OrderCallback = () => void;
 
-const placeOrder = (item: string, callback: OrderCallback) => {
+// const placeOrder = (item: string, callback: () => void): void => {
+//   console.log(`Order placed for ${item}`);
+//   callback();
+// };
+
+const placeOrder = (item: string, callback: OrderCallback): void => {
   console.log(`Order placed for ${item}`);
   callback();
 };
 
-const callbackFunction = () => {
+placeOrder("Pen", () => {
   console.log("Thanks for your order!");
-};
-
-placeOrder("Pen", callbackFunction);
+});
 
 //Sum with a Named Type
 
@@ -46,10 +49,14 @@ console.log(
 );
 console.log(
   compareNumbers(87, 34, (a: number, b: number) => {
-    return a > b
+    /*
+      return a > b
       ? `The difference is ${a - b}!`
       : a === b
         ? "There is no difference!"
         : `The difference is ${b - a}`;
+      return a > b ? `${a - b}!` : a === b ? "0" : `${b - a}`;
+    */
+    return `${a - b}`;
   }),
 );
