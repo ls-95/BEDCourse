@@ -11,7 +11,7 @@ const fetchAdvice = () => {
 
 const fetchAdvice = async (): Promise<void> => {
   try {
-    const response = await fetch("https://api.adviceslip.com/advice");
+    const response: Response = await fetch("https://api.adviceslip.com/advice");
     if (!response.ok) {
       throw new Error("Error fetching data.");
     }

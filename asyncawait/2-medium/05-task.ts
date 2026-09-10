@@ -16,7 +16,9 @@ const fetchAdviceById = (id: number) => {
 
 const fetchAdvice = async (id: number): Promise<void> => {
   try {
-    const response = await fetch(`https://api.adviceslip.com/advice/${id}`);
+    const response: Response = await fetch(
+      `https://api.adviceslip.com/advice/${id}`,
+    );
     if (!response.ok) {
       throw new Error("Fetching did not work");
     }

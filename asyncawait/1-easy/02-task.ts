@@ -1,7 +1,7 @@
 // Resolve or Reject¨
 
 const myPromise = new Promise((resolved, reject) => {
-  const success = true;
+  const success: boolean = true;
 
   if (success) {
     resolved("Resolved operation successfully!");
@@ -10,7 +10,7 @@ const myPromise = new Promise((resolved, reject) => {
   }
 });
 
-const result = async () => {
+const result = async (): Promise<void> => {
   try {
     const message = await myPromise;
     console.log(message);

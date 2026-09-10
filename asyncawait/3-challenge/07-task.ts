@@ -1,15 +1,17 @@
 const coinFlip = new Promise((resolve, reject) => {
-  const outCome = Math.random() > 0.5;
+  const outCome: boolean = Math.random() > 0.5;
 
   outCome ? resolve("You win!") : reject("You lose!");
 });
 
-const result = async () => {
+const result = async (): Promise<void> => {
   try {
     const message = await coinFlip;
     console.log(message);
     if (message === "You win!") {
-      const response = await fetch("https://api.adviceslip.com/advice");
+      const response: Response = await fetch(
+        "https://api.adviceslip.com/advice",
+      );
       if (!response.ok) {
         throw new Error("Error fetching data.");
       }

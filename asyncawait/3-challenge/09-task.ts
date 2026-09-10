@@ -1,6 +1,6 @@
-const randomBrewery = async () => {
+const randomBrewery = async (): Promise<void> => {
   try {
-    const response = await fetch(
+    const response: Response = await fetch(
       "https://api.openbrewerydb.org/v1/breweries/random",
     );
     if (!response.ok) {

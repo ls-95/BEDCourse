@@ -28,7 +28,7 @@ const delayedMessage = (message: string, delay: number) => {
   });
 };
 
-const result = async () => {
+const result = async (): Promise<void> => {
   try {
     const message = await delayedMessage("This is a delayed message", 3000);
     console.log(message);

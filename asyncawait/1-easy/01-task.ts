@@ -52,7 +52,7 @@ result();
 //.then()  .catch()
 const coinFlip2 = () => {
   return new Promise((resolve, reject) => {
-    const outCome = Math.random() > 0.5;
+    const outCome: boolean = Math.random() > 0.5;
     outCome ? resolve("You win!") : reject("You lose");
   });
 };
@@ -68,12 +68,12 @@ coinFlip2()
 //try catch
 const coinFlip = () => {
   return new Promise((resolve, reject) => {
-    const outCome2 = Math.random() > 0.5;
+    const outCome2: boolean = Math.random() > 0.5;
     outCome2 ? resolve("You win!") : reject("You lose");
   });
 };
 
-const result = async () => {
+const result = async (): Promise<void> => {
   try {
     const message = await coinFlip();
     console.log(message);
