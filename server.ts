@@ -5,13 +5,13 @@ const PORT = 3000;
 //middleare
 app.use(express.json());
 
-//Task ONE
+//Task ONE   -  Status code should and does show 200 OK, if not found it would show 404 NOT FOUND
 app.get("/", (req, res) => {
   res.send("Welcome to Formula One!");
 });
 
-//Task TWO
-app.get("/formula1", (req, res) => {
+//Task TWO   -  Status code should and does show 200 OK, if not found it would show 404 NOT FOUND
+app.get("/introduction", (req, res) => {
   res.json({
     sport: "Formula One",
     season: 2026,
@@ -233,8 +233,36 @@ app.get("/formula1", (req, res) => {
   });
 });
 
+//Task THREE - both routes work in Insomnia both returning a 200 status code.   -  Status code should and does show 200 OK, if not found it would show 404 NOT FOUND
+
+//Task FOUR   -  Status code should and does show 200 OK, if not found it would show 404 NOT FOUND
+app.get("/about", (req, res) => {
+  res.json({
+    title: "Formula One",
+    description:
+      "Formula One (commonly known as F1) is the highest class of international open-wheel racing managed by the Fédération Internationale de l'Automobile (FIA). It features the world's fastest regulated road-course racing cars competing globally in a series of events known as Grands Prix.",
+    founded: 1946,
+    firstWordChampionship: 1950,
+    firstWorldChampion: "Giuseppe 'Nino' Farina",
+    funFact:
+      "An F1 car generates so much aerodynamic downforce at high speeds that it could theoretically drive upside down on the ceiling of a tunnel once it crosses 150 mph (240 km/h) without falling.",
+  });
+});
+
+//Task FIVE   -  Status code should and does show 200 OK, if not found it would show 404 NOT FOUND
+app.get("/message", (req, res) => {
+  res.send("Hello from the other side!");
+});
+
+/*
+  res.send() doesnt do any automatic JSON stringification, its used to send different types of data without saying its JSON. Whereas res.json() automatically runs all body parameters through JSON.stringify(), turning them into JSON formatted strings. So when we just want to send a simple string, the best way is to simply use res.send().
+*/
+
+//Task SIX
+
+//See comments above for each route - lines: 8, 13, 236, 238, 252
+//Created a route requst for http://localhost:3000/hello, and as expected the status code is 404 NOT FOUND
+
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });
-
-//Task THREE - both routes work in Insomnia both returning a 200 status code.
