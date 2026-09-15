@@ -2,7 +2,6 @@ import express from "express";
 
 const app = express();
 const PORT = 3000;
-//middleare
 app.use(express.json());
 
 //Task ONE   -  Status code should and does show 200 OK, if not found it would show 404 NOT FOUND
@@ -19,47 +18,80 @@ app.get("/introduction", (req, res) => {
       teams: [
         {
           name: "Mercedes",
-          drivers: ["George Russell", "Kimi Antonelli"],
+          drivers: [
+            { name: "George Russell", age: 28 },
+            { name: "Kimi Antonelli", age: 20 },
+          ],
         },
         {
           name: "Ferrari",
-          drivers: ["Charles Leclerc", "Lewis Hamilton"],
+          drivers: [
+            { name: "Charles Leclerc", age: 28 },
+            { name: "Lewis Hamilton", age: 41 },
+          ],
         },
         {
           name: "McLaren",
-          drivers: ["Lando Norris", "Oscar Piastri"],
+          drivers: [
+            { name: "Lando Norris", age: 26 },
+            { name: "Oscar Piastri", age: 25 },
+          ],
         },
         {
           name: "Red Bull Racing",
-          drivers: ["Max Verstappen", "Isack Hadjar"],
+          drivers: [
+            { name: "Max Verstappen", age: 28 },
+            { name: "Isack Hadjar", age: 21 },
+          ],
         },
         {
           name: "Racing Bulls",
-          drivers: ["Liam Lawson", "Arvid Lindblad"],
+          drivers: [
+            { name: "Liam Lawson", age: 24 },
+            { name: "Arvid Lindblad", age: 19 },
+          ],
         },
         {
           name: "Alpine",
-          drivers: ["Pierre Gasly", "Franco Colapinto"],
+          drivers: [
+            { name: "Pierre Gasly", age: 30 },
+            { name: "Franco Colapinto", age: 23 },
+          ],
         },
         {
           name: "Haas",
-          drivers: ["Esteban Ocon", "Oliver Bearman"],
+          drivers: [
+            { name: "Esteban Ocon", age: 29 },
+            { name: "Oliver Bearman", age: 21 },
+          ],
         },
         {
           name: "Audi",
-          drivers: ["Nico Hülkenberg", "Gabriel Bortoleto"],
+          drivers: [
+            { name: "Nico Hülkenberg", age: 39 },
+            { name: "Gabriel Bortoleto", age: 21 },
+          ],
         },
         {
           name: "Williams",
-          drivers: ["Carlos Sainz Jr", "Alex Albon"],
+          drivers: [
+            { name: "Carlos Sainz Jr", age: 32 },
+            { name: "Alex Albon", age: 30 },
+          ],
         },
         {
           name: "Aston Martin",
-          drivers: ["Fernando Alonso", "Lance Stroll"],
+          drivers: [
+            { name: "Fernando Alonso", age: 45 },
+            { name: "Lance Stroll", age: 27 },
+          ],
         },
         {
           name: "Cadillac",
-          drivers: ["Sergio Perez", "Valtteri Bottas"],
+          drivers: [
+            { name: "Sergio Perez", age: 36 },
+            { name: "Valtteri Bottas", age: 37 },
+          ],
         },
       ],
       races: [
@@ -233,9 +265,14 @@ app.get("/introduction", (req, res) => {
   });
 });
 
-//Task THREE - both routes work in Insomnia both returning a 200 status code.   -  Status code should and does show 200 OK, if not found it would show 404 NOT FOUND
+//Task THREE   -  Status code should and does show 200 OK, if not found it would show 404 NOT FOUND
+
+/*
+  Both routes work in Insomnia both returning a 200 status code.
+*/
 
 //Task FOUR   -  Status code should and does show 200 OK, if not found it would show 404 NOT FOUND
+
 app.get("/about", (req, res) => {
   res.json({
     title: "Formula One",
@@ -260,8 +297,29 @@ app.get("/message", (req, res) => {
 
 //Task SIX
 
-//See comments above for each route - lines: 8, 13, 236, 238, 252
-//Created a route requst for http://localhost:3000/hello, and as expected the status code is 404 NOT FOUND
+/*
+  See comments above for each route - lines: 7, 12, 268, 274, 289
+  Created a route requst for http://localhost:3000/hello, and as expected the status code is 404 NOT FOUND
+*/
+
+//Task SEVEN
+
+/*
+  "/about" route. Changed it and set a status using res.status(200).json() and the output was the same, status code still showing 200:
+
+  app.get("/about", (req, res) => {
+    res.status(200).json({
+     title: "Formula One",
+     description:
+       "Formula One (commonly known as F1) is the highest class of international open-wheel racing managed by the Fédération Internationale de l'Automobile (FIA). It features the world's fastest regulated road-course racing cars competing globally in a series of events known as Grands Prix.",
+     founded: 1946,
+     firstWordChampionship: 1950,
+     firstWorldChampion: "Giuseppe 'Nino' Farina",
+     funFact:
+      "An F1 car generates so much aerodynamic downforce at high speeds that it could theoretically drive upside down on the ceiling of a tunnel once it crosses 150 mph (240 km/h) without falling.",
+    });
+  });
+*/
 
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
