@@ -1,4 +1,4 @@
-# The screenshots will be added to the screenshot folder.
+## The screenshots will be added to the screenshot folder.
 
 # Different Routes:
 
