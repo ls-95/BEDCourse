@@ -19,78 +19,78 @@ app.get("/introduction", (req, res) => {
         {
           name: "Mercedes",
           drivers: [
-            { name: "George Russell", age: 28 },
-            { name: "Kimi Antonelli", age: 20 },
+            { name: "George Russell", age: 28, nationality: "United Kingdom" },
+            { name: "Kimi Antonelli", age: 20, nationality: "Italy" },
           ],
         },
         {
           name: "Ferrari",
           drivers: [
-            { name: "Charles Leclerc", age: 28 },
-            { name: "Lewis Hamilton", age: 41 },
+            { name: "Charles Leclerc", age: 28, nationality: "Monaco" },
+            { name: "Lewis Hamilton", age: 41, nationality: "United Kingdom" },
           ],
         },
         {
           name: "McLaren",
           drivers: [
-            { name: "Lando Norris", age: 26 },
-            { name: "Oscar Piastri", age: 25 },
+            { name: "Lando Norris", age: 26, nationality: "United Kingdom" },
+            { name: "Oscar Piastri", age: 25, nationality: "Australia" },
           ],
         },
         {
           name: "Red Bull Racing",
           drivers: [
-            { name: "Max Verstappen", age: 28 },
-            { name: "Isack Hadjar", age: 21 },
+            { name: "Max Verstappen", age: 28, nationality: "Netherlands" },
+            { name: "Isack Hadjar", age: 21, nationality: "France" },
           ],
         },
         {
           name: "Racing Bulls",
           drivers: [
-            { name: "Liam Lawson", age: 24 },
-            { name: "Arvid Lindblad", age: 19 },
+            { name: "Liam Lawson", age: 24, nationality: "New Zealand" },
+            { name: "Arvid Lindblad", age: 19, nationality: "United Kingdom" },
           ],
         },
         {
           name: "Alpine",
           drivers: [
-            { name: "Pierre Gasly", age: 30 },
-            { name: "Franco Colapinto", age: 23 },
+            { name: "Pierre Gasly", age: 30, nationality: "France" },
+            { name: "Franco Colapinto", age: 23, nationality: "Argentina" },
           ],
         },
         {
           name: "Haas",
           drivers: [
-            { name: "Esteban Ocon", age: 29 },
-            { name: "Oliver Bearman", age: 21 },
+            { name: "Esteban Ocon", age: 29, nationality: "France" },
+            { name: "Oliver Bearman", age: 21, nationality: "United Kingdom" },
           ],
         },
         {
           name: "Audi",
           drivers: [
-            { name: "Nico Hülkenberg", age: 39 },
-            { name: "Gabriel Bortoleto", age: 21 },
+            { name: "Nico Hülkenberg", age: 39, nationality: "Germany" },
+            { name: "Gabriel Bortoleto", age: 21, nationality: "Brazil" },
           ],
         },
         {
           name: "Williams",
           drivers: [
-            { name: "Carlos Sainz Jr", age: 32 },
-            { name: "Alex Albon", age: 30 },
+            { name: "Carlos Sainz Jr", age: 32, nationality: "Spain" },
+            { name: "Alex Albon", age: 30, nationality: "Thailand" },
           ],
         },
         {
           name: "Aston Martin",
           drivers: [
-            { name: "Fernando Alonso", age: 45 },
-            { name: "Lance Stroll", age: 27 },
+            { name: "Fernando Alonso", age: 45, nationality: "Spain" },
+            { name: "Lance Stroll", age: 27, nationality: "Canada" },
           ],
         },
         {
           name: "Cadillac",
           drivers: [
-            { name: "Sergio Perez", age: 36 },
-            { name: "Valtteri Bottas", age: 37 },
+            { name: "Sergio Perez", age: 36, nationality: "Mexico" },
+            { name: "Valtteri Bottas", age: 37, nationality: "Finland" },
           ],
         },
       ],
@@ -273,18 +273,20 @@ app.get("/introduction", (req, res) => {
 
 //Task FOUR   -  Status code should and does show 200 OK, if not found it would show 404 NOT FOUND
 
-app.get("/about", (req, res) => {
-  res.json({
-    title: "Formula One",
-    description:
+/*
+  app.get("/about", (req, res) => {
+    res.json({
+      title: "Formula One",
+      description:
       "Formula One (commonly known as F1) is the highest class of international open-wheel racing managed by the Fédération Internationale de l'Automobile (FIA). It features the world's fastest regulated road-course racing cars competing globally in a series of events known as Grands Prix.",
-    founded: 1946,
-    firstWordChampionship: 1950,
-    firstWorldChampion: "Giuseppe 'Nino' Farina",
-    funFact:
-      "An F1 car generates so much aerodynamic downforce at high speeds that it could theoretically drive upside down on the ceiling of a tunnel once it crosses 150 mph (240 km/h) without falling.",
+      founded: 1946,
+      firstWordChampionship: 1950,
+      firstWorldChampion: "Giuseppe 'Nino' Farina",
+      funFact:
+        "An F1 car generates so much aerodynamic downforce at high speeds that it could theoretically drive upside down on the ceiling of a tunnel once it crosses 150 mph (240 km/h) without falling.",
+    });
   });
-});
+*/
 
 //Task FIVE   -  Status code should and does show 200 OK, if not found it would show 404 NOT FOUND
 app.get("/message", (req, res) => {
@@ -298,7 +300,7 @@ app.get("/message", (req, res) => {
 //Task SIX
 
 /*
-  See comments above for each route - lines: 7, 12, 268, 274, 289
+  See comments above for each route - lines: 7, 12, 268, 274, 291
   Created a route requst for http://localhost:3000/hello, and as expected the status code is 404 NOT FOUND
 */
 
@@ -306,19 +308,34 @@ app.get("/message", (req, res) => {
 
 /*
   "/about" route. Changed it and set a status using res.status(200).json() and the output was the same, status code still showing 200:
+*/
 
-  app.get("/about", (req, res) => {
-    res.status(200).json({
-     title: "Formula One",
-     description:
-       "Formula One (commonly known as F1) is the highest class of international open-wheel racing managed by the Fédération Internationale de l'Automobile (FIA). It features the world's fastest regulated road-course racing cars competing globally in a series of events known as Grands Prix.",
-     founded: 1946,
-     firstWordChampionship: 1950,
-     firstWorldChampion: "Giuseppe 'Nino' Farina",
-     funFact:
+app.get("/about", (req, res) => {
+  res.status(200).json({
+    title: "Formula One",
+    description:
+      "Formula One (commonly known as F1) is the highest class of international open-wheel racing managed by the Fédération Internationale de l'Automobile (FIA). It features the world's fastest regulated road-course racing cars competing globally in a series of events known as Grands Prix.",
+    founded: 1946,
+    firstWordChampionship: 1950,
+    firstWorldChampion: "Giuseppe 'Nino' Farina",
+    funFact:
       "An F1 car generates so much aerodynamic downforce at high speeds that it could theoretically drive upside down on the ceiling of a tunnel once it crosses 150 mph (240 km/h) without falling.",
-    });
   });
+});
+
+//Task EIGHT
+
+app.get("/maintenance", (req, res) => {
+  res.status(503).send("We're down for maintenance, check back soon!");
+});
+
+/*
+  In Scripts => After-response, added this code to see 503 status code:
+
+  insomnia.test('Check for 503 status', () => {
+    insomnia.expect(insomnia.response.status).to.equal(503);
+});
+
 */
 
 app.listen(PORT, () => {
