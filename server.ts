@@ -191,7 +191,7 @@ app.get("/introduction", (req, res) => {
       driversStandings: [
         {
           position: 1,
-          driver: "Andrea Kimi Antonelli",
+          driver: "Kimi Antonelli",
           team: "Mercedes",
           points: 292,
           wins: 8,
