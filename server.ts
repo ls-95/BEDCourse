@@ -1,7 +1,7 @@
 import express from "express";
 
 const app = express();
-const PORT = 3000;
+const PORT: number = 3000;
 
 app.use(express.json());
 
@@ -191,21 +191,21 @@ let drivers: Drivers[] = [
     id: 22,
     name: "Valtteri Bottas",
     team: "Cadillac",
-    number: 77,
+    number: 78,
     nationality: "Finland",
     wins: 0,
   },
 ];
 
 // Task ONE - status code 200
-app.get("/drivers", (req, res) => {
+app.get("/drivers", (req, res): void => {
   res.json(drivers);
 });
 
 //Task TWO - status code 200
 
-app.post("/drivers", (req, res) => {
-  const newDriver = {
+app.post("/drivers", (req, res): void => {
+  const newDriver: Drivers = {
     id: drivers.length + 1,
     name: req.body.name,
     team: req.body.team,
@@ -213,11 +213,39 @@ app.post("/drivers", (req, res) => {
     nationality: req.body.nationality,
     wins: req.body.wins,
   };
-  drivers.push(newDriver);
-  res.json({ message: "New driver added successfully!", driver: newDriver });
+  // Task SIX
+  if (!newDriver.name || !newDriver.team) {
+    res.status(400).json({ message: "Missing information." });
+  } else {
+    drivers.push(newDriver);
+    res.json({ message: "New driver added successfully!", driver: newDriver });
+  }
 });
 
 // Task THREE - both have a status code 200 and both show what they should show.
+
+// Task FOUR
+
+app.put("/drivers/:id", (req, res) => {
+  const driverId: number = parseInt(req.params.id);
+  const driver: Drivers | undefined = drivers.find((d) => d.id === driverId);
+  if (!driver) {
+    return res.status(404).json({ message: "Driver not found!" });
+  }
+  driver.name = req.body.name || driver.name;
+  driver.team = req.body.team || driver.team;
+  driver.number = req.body.number || driver.number;
+  driver.nationality = req.body.nationality || driver.nationality;
+  driver.wins = req.body.wins || driver.wins;
+  res.json({ message: "Driver update successfully!", driver });
+});
+
+// Task FIVE
+app.delete("/drivers/:id", (req, res): void => {
+  const driverId: number = parseInt(req.params.id);
+  drivers = drivers.filter((d) => d.id !== driverId);
+  res.json({ message: "Driver deleted successfully! " });
+});
 
 app.listen(PORT, () => {
   console.log(`Server is running on PORT: ${PORT}`);
