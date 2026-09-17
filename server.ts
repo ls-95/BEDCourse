@@ -218,11 +218,24 @@ app.post("/drivers", (req, res): void => {
     res.status(400).json({ message: "Missing information." });
   } else {
     drivers.push(newDriver);
-    res.json({ message: "New driver added successfully!", driver: newDriver });
+    res
+      .status(201) // Task SEVEN
+      .json({ message: "New driver added successfully!", driver: newDriver });
   }
 });
 
 // Task THREE - both have a status code 200 and both show what they should show.
+
+// Task EIGHT
+app.get("/drivers/wins", (req, res) => {
+  let result = 0;
+  drivers.forEach((d) => (result += d.wins));
+  let winningDrivers = drivers.filter((d) => d.wins > 0).map((d) => d.name);
+  res.json({
+    totalRaceWins: result,
+    raceWinners: `${winningDrivers.join(", ")}.`,
+  });
+});
 
 // Task FOUR
 
