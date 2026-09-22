@@ -71,6 +71,48 @@ app.post("/users", (req, res) => {
   }
 });
 
+// Task FOUR
+
+const randomLoginSchema = z.object({
+  results: z.array(
+    z.object({
+      login: z.object({
+        username: z.string(),
+      }),
+      registered: z.object({
+        date: z.string(),
+      }),
+    }),
+  ),
+});
+
+app.get("/random-login", async (req, res) => {
+  try {
+    const response = await fetch("https://randomuser.me/api/");
+    if (!response.ok) {
+      return res.status(response.status).json({ error: "Error fetching data" });
+    }
+    const data = await response.json();
+    const validateLogin = randomLoginSchema.safeParse(data);
+    if (!validateLogin.success) {
+      return res.status(500).json({
+        message: "Internal Server Error.",
+        details: validateLogin.error,
+      });
+    }
+    const login = validateLogin.data?.results[0];
+    res.send(
+      `${login?.login.username} (registered on ${login?.registered.date.slice(0, 10)})`,
+    );
+    // res.json({
+    //   username: login?.login.username,
+    //   registered: login?.registered.date.slice(0, 10),
+    // });
+  } catch (error) {
+    res.status(500).json(error);
+  }
+});
+
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });
