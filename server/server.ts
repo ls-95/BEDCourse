@@ -54,6 +54,23 @@ app.get("/random-person", async (req, res) => {
   }
 });
 
+// Task THREE
+
+const newUserSchema = z.object({
+  name: z.string().min(3).max(12),
+  age: z.number().min(18).max(100).optional().default(28),
+  email: z.email().toLowerCase(),
+});
+
+app.post("/users", (req, res) => {
+  const validateNewUser = newUserSchema.safeParse(req.body);
+  if (!validateNewUser.success) {
+    res.status(400).json({ message: validateNewUser.error });
+  } else {
+    res.status(201).json({ user: validateNewUser });
+  }
+});
+
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });
