@@ -1,5 +1,30 @@
 {
 	"devDependencies": {
-		"@biomejs/biome": "2.5.14"
+		"@biomejs/biome": "2.5.14",
+		"@types/express": "^5.0.6",
+		"@types/pg": "^8.23.1",
+		"typescript": "^7.0.2"
+	},
+	"type": "module",
+	"name": "bedcourse",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.ts",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/ls-95/BEDCourse.git"
+	},
+	"keywords": [],
+	"bugs": {
+		"url": "https://github.com/ls-95/BEDCourse/issues"
+	},
+	"homepage": "https://github.com/ls-95/BEDCourse#readme",
+	"dependencies": {
+		"dotenv": "^18.0.5",
+		"express": "^5.2.1",
+		"pg": "^8.23.1"
 	}
 }
