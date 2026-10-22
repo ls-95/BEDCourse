@@ -34,9 +34,8 @@ app.get("/books", async (req, res) => {
 		const result = await pool.query(sql, values);
 		res.json(result.rows);
 	} catch (error) {
-		res
-			.status(500)
-			.send(error instanceof Error ? error.message : "Something went wrong");
+		console.error(error);
+		res.status(500).send("Something went wrong");
 	}
 });
 
@@ -45,9 +44,8 @@ app.get("/authors", async (_req, res) => {
 		const result = await pool.query("SELECT * FROM authors");
 		res.json(result.rows);
 	} catch (error) {
-		res
-			.status(500)
-			.send(error instanceof Error ? error.message : "Something went wrong");
+		console.error(error);
+		res.status(500).send("Something went wrong");
 	}
 });
 
@@ -70,13 +68,33 @@ app.get("/books/:id", async (req, res) => {
 		}
 		res.json(result.rows[0]);
 	} catch (error) {
-		res
-			.status(500)
-			.send(error instanceof Error ? error.message : "Something went wrong");
+		console.error(error);
+		res.status(500).send("Something went wrong");
 	}
 });
 
-//app.get("/authors/:id/books") -> didn't manage to do it.
+app.get("/authors/:id/books", async (req, res) => {
+	const { id } = req.params;
+	if (!Number.isInteger(Number(id))) {
+		return res.status(400).send("Please enter a numeric id.");
+	}
+	try {
+		const author = await pool.query("SELECT id FROM authors WHERE id = $1", [
+			id,
+		]);
+		if (author.rows.length === 0) {
+			return res.status(404).send("Author not found.");
+		}
+		const result = await pool.query(
+			"SELECT books.* FROM books JOIN authors ON books.author_id = authors.id WHERE authors.id = $1",
+			[id],
+		);
+		res.status(200).json(result.rows);
+	} catch (error) {
+		console.error(error);
+		res.status(500).send("Something went wrong");
+	}
+});
 
 app.post("/books", async (req, res) => {
 	const { title, genre, published_year, author_id } = req.body;
@@ -95,14 +113,16 @@ app.post("/books", async (req, res) => {
 				error: "Something went wrong",
 			});
 		}
-		res
-			.status(500)
-			.send(error instanceof Error ? error.message : "Something went wrong");
+		console.error(error);
+		res.status(500).send("Something went wrong");
 	}
 });
 
 app.post("/authors", async (req, res) => {
 	const { name } = req.body;
+	if (!name) {
+		return res.status(400).send("Please add a name.");
+	}
 	try {
 		const result = await pool.query(
 			"INSERT INTO authors (name) VALUES ($1) RETURNING *",
@@ -110,9 +130,8 @@ app.post("/authors", async (req, res) => {
 		);
 		res.status(201).json(result.rows[0]);
 	} catch (error) {
-		res
-			.status(500)
-			.send(error instanceof Error ? error.message : "Something went wrong");
+		console.error(error);
+		res.status(500).send("Something went wrong");
 	}
 });
 
@@ -136,21 +155,19 @@ app.put("/books/:id", async (req, res) => {
 		}
 		res.json(result.rows[0]); //Otherwise send back updated book
 	} catch (error) {
-		res
-			.status(500)
-			.send(error instanceof Error ? error.message : "Something went wrong");
+		console.error(error);
+		res.status(500).send("Something went wrong");
 	}
 });
 
 app.patch("/books/:id", async (req, res) => {
 	const { id } = req.params;
 	const { title, published_year, genre } = req.body;
+	if (!req.body || Object.keys(req.body).length === 0) {
+		return res.status(400).json({ error: "Request body is required" });
+	}
 	if (!Number.isInteger(Number(id))) {
 		return res.status(400).send("Please enter a numeric id.");
-	}
-
-	if (Object.keys(req.body).length === 0) {
-		return res.status(400).send({ error: "Body is empty" });
 	}
 
 	try {
@@ -168,9 +185,8 @@ app.patch("/books/:id", async (req, res) => {
 
 		res.json(result.rows[0]);
 	} catch (error) {
-		res
-			.status(500)
-			.send(error instanceof Error ? error.message : "Something went wrong");
+		console.error(error);
+		res.status(500).send("Something went wrong");
 	}
 });
 
@@ -189,9 +205,8 @@ app.delete("/books/:id", async (req, res) => {
 		}
 		res.send("Book deleted successfully");
 	} catch (error) {
-		res
-			.status(500)
-			.send(error instanceof Error ? error.message : "Something went wrong");
+		console.error(error);
+		res.status(500).send("Something went wrong");
 	}
 });
 
