@@ -12,6 +12,8 @@ services:
       - ${DB_PORT}:5432
     volumes:
       - pgdata:/var/lib/postgresql/18/docker
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+      # This shares the init.sql file with the postgres container. It will run the file the first time the db is created.
 
   pgadmin:
     container_name: pgadmin4_container
