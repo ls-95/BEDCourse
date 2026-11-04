@@ -1,5 +1,10 @@
 import { describe, expect, test } from "vitest";
-import { createPizza, orderPizza, sendOrder } from "./pizzashop";
+import {
+	chargeCustomer,
+	createPizza,
+	orderPizza,
+	sendOrder,
+} from "./pizzashop";
 
 describe("Pizza Shop Unit Tests", () => {
 	test("createPizza returns correct type and price for margherita", () => {
@@ -31,5 +36,9 @@ describe("Pizza Shop Unit Tests", () => {
 		const pizza = createPizza("vegetarian");
 
 		expect(pizza).toEqual({ type: "vegetarian", price: 110 });
+	});
+	test("chargeCustomer returns true for a valid orderId and amount", () => {
+		const charge = chargeCustomer(42, 100);
+		expect(charge).toEqual(true);
 	});
 });
