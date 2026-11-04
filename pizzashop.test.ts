@@ -37,8 +37,27 @@ describe("Pizza Shop Unit Tests", () => {
 
 		expect(pizza).toEqual({ type: "vegetarian", price: 110 });
 	});
+
 	test("chargeCustomer returns true for a valid orderId and amount", () => {
 		const charge = chargeCustomer(42, 100);
-		expect(charge).toEqual(true);
+		expect(charge).toBe(true);
+	});
+
+	test("chargeCustomer throws when orderId is undefined", () => {
+		expect(() => chargeCustomer(undefined, 100)).toThrow(
+			"Cannot charge the customer without a valid order ID!",
+		);
+	});
+
+	test("chargeCustomer throws when orderId is negative", () => {
+		expect(() => chargeCustomer(-1, 100)).toThrow();
+	});
+
+	test("chargeCustomer throws when orderId is not an integer", () => {
+		expect(() => chargeCustomer(12.5, 100)).toThrow();
+	});
+
+	test("chargeCustomer throws when amount is 0", () => {
+		expect(() => chargeCustomer(42, 0)).toThrow();
 	});
 });
