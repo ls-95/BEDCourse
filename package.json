@@ -1,5 +1,16 @@
 {
 	"devDependencies": {
-		"@biomejs/biome": "2.5.14"
+		"@biomejs/biome": "2.5.14",
+		"@vitest/coverage-v8": "^5.1.0",
+		"typescript": "^7.0.2",
+		"vitest": "^5.1.0"
+	},
+	"scripts": {
+		"test": "vitest run",
+		"test:watch": "vitest",
+		"test:coverage": "vitest run --coverage"
+	},
+	"dependencies": {
+		"zod": "^4.6.7"
 	}
 }
