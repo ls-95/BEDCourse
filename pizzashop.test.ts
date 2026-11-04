@@ -2,7 +2,7 @@ import { describe, expect, test } from "vitest";
 import { createPizza, orderPizza, sendOrder } from "./pizzashop";
 
 describe("Pizza Shop Unit Tests", () => {
-	test("createPizza returns correct type and price", () => {
+	test("createPizza returns correct type and price for margherita", () => {
 		const pizza = createPizza("margherita");
 
 		expect(pizza).toEqual({ type: "margherita", price: 100 });
@@ -27,7 +27,7 @@ describe("Pizza Shop Unit Tests", () => {
 		expect(result).toBe(true);
 	});
 
-	test("createPizza returns correct type and price", () => {
+	test("createPizza returns correct type and price for vegetarian", () => {
 		const pizza = createPizza("vegetarian");
 
 		expect(pizza).toEqual({ type: "vegetarian", price: 110 });
