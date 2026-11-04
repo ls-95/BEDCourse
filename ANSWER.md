@@ -13,3 +13,10 @@ TS checks the code in the editor, which is the red line under menu[pizzaType]. W
 Number 5:
 
 orderPizza("vegetarian") that returns true belongs in pizzashop.integration.test as it tests serveral functions working together and not just one function on its own.
+
+## Exercise 2:
+
+Expected: "Cannot charge the customer without a valid orderID!"
+Received: "Cannot charge the cutomer without a valid order ID!"
+
+The bug was 'customer' having a typo. The error message above clearly pointed me to the mistake.
