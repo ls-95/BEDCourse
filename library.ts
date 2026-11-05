@@ -21,3 +21,11 @@ export const findBook = (type: unknown): Book => {
 	const bookType = BookTitleSchema.parse(type);
 	return BookSchema.parse(catalogue[bookType]);
 };
+
+export const checkOutBook = (book: unknown): number => {
+	const checkBook = BookSchema.parse(book);
+	if (checkBook.copiesAvailable === 0) {
+		throw new Error("No copies available");
+	}
+	return Math.floor(Math.random() * 9000) + 1000;
+};
