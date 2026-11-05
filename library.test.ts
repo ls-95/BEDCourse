@@ -1,7 +1,8 @@
 import { describe, expect, test } from "vitest";
-import { checkOutBook, findBook } from "./library";
+import { checkOutBook, findBook, registerLoan } from "./library";
 
 describe("Library Unit Tests", () => {
+	//findBook Unit Tests
 	test("findBook accepts dune", () => {
 		const book = findBook("dune");
 		expect(book).toEqual({ title: "dune", copiesAvailable: 3 });
@@ -38,5 +39,19 @@ describe("Library Unit Tests", () => {
 
 	test("checkOutBook throws error when missing copiesAvailable", () => {
 		expect(() => checkOutBook({ title: "neuromancer" })).toThrow();
+	});
+
+	//registerBook Unit Tests
+	test("registerBook returns a loan object", () => {
+		const register = registerLoan(1234, "dune", 7);
+		expect(register).toEqual({ loanId: 1234, title: "dune", memberId: 7 });
+	});
+
+	test("registerBook throws error when memberId is 0", () => {
+		expect(() => registerLoan(1234, "dune", 0)).toThrow();
+	});
+
+	test("registerBook throws error when the title isn't in the catalogue", () => {
+		expect(() => registerLoan(1234, "harry potter", 4)).toThrow();
 	});
 });
