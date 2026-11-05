@@ -25,3 +25,7 @@ The bug was 'customer' having a typo. The error message above clearly pointed me
 
 toBe checks simple values like numbers, strings or true/false.
 toEqual checks objects and arrays. It checks every field inside to make sure that the two objects are equal.
+
+## Exercise 5:
+
+Yes it could pass by luck if the code were wrong as the probability of the numbers being between 1000 - 9999 are very high.
