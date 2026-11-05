@@ -26,6 +26,14 @@ The bug was 'customer' having a typo. The error message above clearly pointed me
 toBe checks simple values like numbers, strings or true/false.
 toEqual checks objects and arrays. It checks every field inside to make sure that the two objects are equal.
 
+# Medium
+
 ## Exercise 5:
 
 Yes it could pass by luck if the code were wrong as the probability of the numbers being between 1000 - 9999 are very high.
+
+## Exercise 6:
+
+In this example, borrowBook("foundation", 7) starts. findBook then finds the book. checkOutBook sees copiesAvaibable is 0, so it throws. The error stops checkOutBook so it stops borrowBook and the error goes up to the test. registerLoan never runs as the error stops everything after it.
+
+It shows that the error travels up through the funtions that called it, until something catches it. borrowBook is the only function the test called but the error from checkOutBook still reached the test.
