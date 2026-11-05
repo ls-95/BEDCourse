@@ -20,3 +20,8 @@ Expected: "Cannot charge the customer without a valid orderID!"
 Received: "Cannot charge the cutomer without a valid order ID!"
 
 The bug was 'customer' having a typo. The error message above clearly pointed me to the mistake.
+
+## Exercise 3:
+
+toBe checks simple values like numbers, strings or true/false.
+toEqual checks objects and arrays. It checks every field inside to make sure that the two objects are equal.
