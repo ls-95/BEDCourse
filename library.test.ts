@@ -1,5 +1,5 @@
 import { describe, expect, test } from "vitest";
-import { checkOutBook, findBook, registerLoan } from "./library";
+import { canBorrow, checkOutBook, findBook, registerLoan } from "./library";
 
 describe("Library Unit Tests", () => {
 	//findBook Unit Tests
@@ -53,5 +53,57 @@ describe("Library Unit Tests", () => {
 
 	test("registerBook throws error when the title isn't in the catalogue", () => {
 		expect(() => registerLoan(1234, "harry potter", 4)).toThrow();
+	});
+
+	//canBorrow Unit Tests
+	test("basic member with 1 book can borrow", () => {
+		const member = canBorrow({
+			id: 1,
+			name: "Jasper",
+			membership: "basic",
+			booksOnLoan: 1,
+		});
+		expect(member).toBe(true);
+	});
+
+	test("basic member with 2 books cannot borrow", () => {
+		const member = canBorrow({
+			id: 2,
+			name: "Rick Astley",
+			membership: "basic",
+			booksOnLoan: 2,
+		});
+		expect(member).toBe(false);
+	});
+
+	test("premium member with 4 books can borrow", () => {
+		const member = canBorrow({
+			id: 3,
+			name: "Whitney Houston",
+			membership: "premium",
+			booksOnLoan: 4,
+		});
+		expect(member).toBe(true);
+	});
+
+	test("premium member with 5 books can borrow", () => {
+		const member = canBorrow({
+			id: 4,
+			name: "Celine Dion",
+			membership: "premium",
+			booksOnLoan: 5,
+		});
+		expect(member).toBe(false);
+	});
+
+	test("premium member with 5 books can borrow", () => {
+		expect(() =>
+			canBorrow({
+				id: 5,
+				name: "",
+				membership: "premium",
+				booksOnLoan: 3,
+			}),
+		).toThrow();
 	});
 });

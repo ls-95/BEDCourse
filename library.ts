@@ -20,6 +20,15 @@ export const LoanSchema = z.object({
 	memberId: z.number().int().positive(),
 });
 
+export const MembershipSchema = z.enum(["basic", "premium"]);
+
+export const MemberSchema = z.object({
+	id: z.number().int().positive(),
+	name: z.string().trim().min(1),
+	membership: MembershipSchema,
+	booksOnLoan: z.number().int().nonnegative(),
+});
+
 // Types inferred from the schemas
 export type Book = z.infer<typeof BookSchema>;
 
@@ -50,4 +59,23 @@ export const borrowBook = (title: unknown, memberId: unknown): Loan => {
 	const book = findBook(title);
 	const loanId = checkOutBook(book);
 	return registerLoan(loanId, book.title, memberId);
+};
+
+export const canBorrow = (member: unknown): boolean => {
+	const membership = MemberSchema.parse(member);
+	if (membership.membership === "basic") {
+		if (membership.booksOnLoan < 2) {
+			return true;
+		} else {
+			return false;
+		}
+	} else if (membership.membership === "premium") {
+		if (membership.booksOnLoan < 5) {
+			return true;
+		} else {
+			return false;
+		}
+	} else {
+		return false;
+	}
 };
