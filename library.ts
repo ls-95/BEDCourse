@@ -71,3 +71,12 @@ export const canBorrow = (member: unknown): boolean => {
 		return false;
 	}
 };
+
+export const borrowWithLimit = (title: unknown, member: unknown): Loan => {
+	const mbr = MemberSchema.parse(member);
+	if (!canBorrow(mbr)) {
+		throw new Error("Borrowing limit reached");
+	} else {
+		return borrowBook(title, mbr.id);
+	}
+};
