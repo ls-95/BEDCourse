@@ -1,5 +1,5 @@
 import { describe, expect, test } from "vitest";
-import { borrowBook, borrowWithLimit } from "./library";
+import { borrowBook, borrowBooks, borrowWithLimit } from "./library";
 
 describe("Borrow Book Integration Test", () => {
 	//borrowBook integration test
@@ -54,5 +54,51 @@ describe("Borrow Book Integration Test", () => {
 				booksOnLoan: 2,
 			}),
 		).toThrow("No copies available");
+	});
+
+	//borrowLimit integration test
+	test("should successfully complete to borrow two books", () => {
+		const result = borrowBooks(["dune", "neuromancer"], {
+			id: 14,
+			name: "Walter White",
+			membership: "premium",
+			booksOnLoan: 0,
+		});
+		expect(result).toHaveLength(2);
+		expect(result[0].title).toBe("dune");
+		expect(result[1].title).toBe("neuromancer");
+	});
+
+	test("should successfully complete to throw an error when there are no titles", () => {
+		expect(() =>
+			borrowBooks([], {
+				id: 15,
+				name: "James Bond",
+				membership: "basic",
+				booksOnLoan: 1,
+			}),
+		).toThrow();
+	});
+
+	test("should successfully complete to throw an error when there are four titles", () => {
+		expect(() =>
+			borrowBooks(["dune", "neuromancer", "foundation", "frankenstein"], {
+				id: 16,
+				name: "Charles Leclerc",
+				membership: "premium",
+				booksOnLoan: 0,
+			}),
+		).toThrow();
+	});
+
+	test("should successfully complete to throw an error when a basic member wants to borrow more than the limit", () => {
+		expect(() =>
+			borrowBooks(["dune", "neuromancer"], {
+				id: 17,
+				name: "Max Verstappen",
+				membership: "basic",
+				booksOnLoan: 1,
+			}),
+		).toThrow("Borrowing limit reached");
 	});
 });
