@@ -37,3 +37,11 @@ Yes it could pass by luck if the code were wrong as the probability of the numbe
 In this example, borrowBook("foundation", 7) starts. findBook then finds the book. checkOutBook sees copiesAvaibable is 0, so it throws. The error stops checkOutBook so it stops borrowBook and the error goes up to the test. registerLoan never runs as the error stops everything after it.
 
 It shows that the error travels up through the funtions that called it, until something catches it. borrowBook is the only function the test called but the error from checkOutBook still reached the test.
+
+# Challenge
+
+## Exercise 7:
+
+borrowWithLimit decides which error the member sees first. In the function, it first checks if the member data is valid. Then, it checks if the member is under their limit. After that, borrowBook finds the book and checks out a copy.
+
+I would keep this order. The member check is quick and doesn't need the book. If the member is at their limit, the function should stop before a book is checked out.
