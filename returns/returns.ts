@@ -19,7 +19,7 @@ export const findLoan = (loanId: unknown) => {
 	if (!loan) {
 		throw new Error("Loan not found");
 	}
-	return { id: loan.loanId, title: loan.title, memberId: loan.memberId };
+	return { loanId: loan.loanId, title: loan.title, memberId: loan.memberId };
 };
 
 export const markReturned = (loan: unknown) => {
