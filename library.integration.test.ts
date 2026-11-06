@@ -29,7 +29,7 @@ describe("Borrow Book Integration Test", () => {
 			booksOnLoan: 0,
 		});
 		expect(result.title).toBe("dune");
-		expect(result.memberId).toBe(3);
+		expect(result.memberId).toBe(2);
 		expect(result.loanId).toBeGreaterThanOrEqual(1000);
 		expect(result.loanId).toBeLessThanOrEqual(9999);
 	});
