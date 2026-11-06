@@ -45,3 +45,11 @@ It shows that the error travels up through the funtions that called it, until so
 borrowWithLimit decides which error the member sees first. In the function, it first checks if the member data is valid. Then, it checks if the member is under their limit. After that, borrowBook finds the book and checks out a copy.
 
 I would keep this order. The member check is quick and doesn't need the book. If the member is at their limit, the function should stop before a book is checked out.
+
+## Exercise 8:
+
+When I add a return type of Loan to findLoan and then put the bug back, it is underlined and it states:
+Object literal may only specify known properties, and 'id' does not exist in type '{ loanId: number; title: string; memberId: number; }'.
+This means findLoan promises to return a Loan but the object that is returned has id instead of loanId.
+
+TypeScript would catch the bug first as it shows a red line in the editor before running anything. This only happens when I add a return type of Loan to findLoan. Zod then catches it second when the code runs, markReturned parses LoanSchema which triggers a Zod error.
