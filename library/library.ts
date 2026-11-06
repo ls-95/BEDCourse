@@ -85,11 +85,8 @@ export const borrowLimit = (membership: unknown): number => {
 	const mbrship = MembershipSchema.parse(membership);
 	if (mbrship === "basic") {
 		return 2;
-	} else if (mbrship === "premium") {
-		return 5;
-	} else {
-		throw new Error("Not a valid membership");
 	}
+	return 5;
 };
 
 export const borrowWithLimit = (title: unknown, member: unknown): Loan => {

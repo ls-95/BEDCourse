@@ -53,3 +53,7 @@ Object literal may only specify known properties, and 'id' does not exist in typ
 This means findLoan promises to return a Loan but the object that is returned has id instead of loanId.
 
 TypeScript would catch the bug first as it shows a red line in the editor before running anything. This only happens when I add a return type of Loan to findLoan. Zod then catches it second when the code runs, markReturned parses LoanSchema which triggers a Zod error.
+
+## Exercise 9:
+
+After refactoring canBorrow, I knew I hadn't broken anything as I ran tests and they passed.

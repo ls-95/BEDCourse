@@ -217,4 +217,8 @@ describe("Library Unit Tests", () => {
 		const result = borrowLimit("premium");
 		expect(result).toBe(5);
 	});
+
+	test("borrowLimit throws an error for incorrect value", () => {
+		expect(() => borrowLimit("free")).toThrow();
+	});
 });
