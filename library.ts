@@ -64,17 +64,9 @@ export const borrowBook = (title: unknown, memberId: unknown): Loan => {
 export const canBorrow = (member: unknown): boolean => {
 	const membership = MemberSchema.parse(member);
 	if (membership.membership === "basic") {
-		if (membership.booksOnLoan < 2) {
-			return true;
-		} else {
-			return false;
-		}
+		return membership.booksOnLoan < 2;
 	} else if (membership.membership === "premium") {
-		if (membership.booksOnLoan < 5) {
-			return true;
-		} else {
-			return false;
-		}
+		return membership.booksOnLoan < 5;
 	} else {
 		return false;
 	}
