@@ -1,5 +1,11 @@
 import { describe, expect, test } from "vitest";
-import { canBorrow, checkOutBook, findBook, registerLoan } from "./library";
+import {
+	borrowBooks,
+	canBorrow,
+	checkOutBook,
+	findBook,
+	registerLoan,
+} from "./library";
 
 describe("Library Unit Tests", () => {
 	//findBook Unit Tests
@@ -105,5 +111,19 @@ describe("Library Unit Tests", () => {
 				booksOnLoan: 3,
 			}),
 		).toThrow();
+	});
+
+	//borrowBooks
+	test("borrowBooks accepts mulitple titles", () => {
+		const titles = borrowBooks(["dune", "foundation"], {
+			id: 7,
+			name: "Michael Jackson",
+			membership: "premium",
+			booksOnLoan: 1,
+		});
+		expect(titles[0].title).toBe("dune");
+		expect(titles[0].memberId).toBe(7);
+		expect(titles[1].title).toBe("foundation");
+		expect(titles[1].memberId).toBe(7);
 	});
 });

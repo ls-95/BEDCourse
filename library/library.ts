@@ -29,6 +29,8 @@ export const MemberSchema = z.object({
 	booksOnLoan: z.number().int().nonnegative(),
 });
 
+export const BookTitlesSchema = z.array(BookTitleSchema).min(1).max(3);
+
 // Types inferred from the schemas
 export type Book = z.infer<typeof BookSchema>;
 
@@ -79,4 +81,17 @@ export const borrowWithLimit = (title: unknown, member: unknown): Loan => {
 	} else {
 		return borrowBook(title, mbr.id);
 	}
+};
+
+export const borrowBooks = (titles: unknown, member: unknown): Loan[] => {
+	const validTitles = BookTitlesSchema.parse(titles);
+	const mbr = MemberSchema.parse(member);
+
+	const result = validTitles.map((t) => {
+		const books = findBook(t);
+		const loanIds = checkOutBook(books);
+		return registerLoan(loanIds, books.title, mbr.id);
+	});
+
+	return result;
 };
