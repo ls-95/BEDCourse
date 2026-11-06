@@ -57,3 +57,10 @@ TypeScript would catch the bug first as it shows a red line in the editor before
 ## Exercise 9:
 
 After refactoring canBorrow, I knew I hadn't broken anything as I ran tests and they passed.
+
+# Bonus:
+
+## 3:
+
+No, 100% coverage does not mean there are no bugs as coverage only shows which lines the tests ran. 
+In Exercise 8, the tests would have passed even if there was 100% coverage as each function is tested on its own but in the integration test, functions work together, so it was able to find the bug as field names didnt match.
