@@ -92,7 +92,7 @@ describe("Library Unit Tests", () => {
 		expect(member).toBe(true);
 	});
 
-	test("premium member with 5 books can borrow", () => {
+	test("premium member with 5 books on loan cannot borrow", () => {
 		const member = canBorrow({
 			id: 4,
 			name: "Celine Dion",
@@ -102,7 +102,7 @@ describe("Library Unit Tests", () => {
 		expect(member).toBe(false);
 	});
 
-	test("premium member with 3 books can borrow", () => {
+	test("premium member with 3 books cannot borrow with an empty name", () => {
 		expect(() =>
 			canBorrow({
 				id: 5,
@@ -191,6 +191,17 @@ describe("Library Unit Tests", () => {
 				name: "Catherine Tate",
 				membership: "basic",
 				booksOnLoan: 1,
+			}),
+		).toThrow();
+	});
+
+	test("borrowBooks throws an error when there are too many titles: 4 (all titles exist in catalogue)", () => {
+		expect(() =>
+			borrowBooks(["dune", "neuromancer", "foundation", "frankenstein"], {
+				id: 14,
+				name: "Claudia Winkleman",
+				membership: "premium",
+				booksOnLoan: 0,
 			}),
 		).toThrow();
 	});

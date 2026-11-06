@@ -4,10 +4,16 @@ const catalogue = {
 	dune: { title: "dune", copiesAvailable: 3 },
 	neuromancer: { title: "neuromancer", copiesAvailable: 1 },
 	foundation: { title: "foundation", copiesAvailable: 0 },
+	frankenstein: { title: "frankenstein", copiesAvailable: 2 },
 };
 
 // Schemas
-export const BookTitleSchema = z.enum(["dune", "neuromancer", "foundation"]);
+export const BookTitleSchema = z.enum([
+	"dune",
+	"neuromancer",
+	"foundation",
+	"frankenstein",
+]);
 
 export const BookSchema = z.object({
 	title: BookTitleSchema,
@@ -65,12 +71,24 @@ export const borrowBook = (title: unknown, memberId: unknown): Loan => {
 
 export const canBorrow = (member: unknown, count = 1): boolean => {
 	const membership = MemberSchema.parse(member);
-	if (membership.membership === "basic") {
-		return membership.booksOnLoan + count <= 2;
-	} else if (membership.membership === "premium") {
-		return membership.booksOnLoan + count <= 5;
+	return membership.booksOnLoan + count <= borrowLimit(membership.membership);
+	// if (membership.membership === "basic") {
+	// 	return membership.booksOnLoan + count <= 2;
+	// } else if (membership.membership === "premium") {
+	// 	return membership.booksOnLoan + count <= 5;
+	// } else {
+	// 	return false;
+	// }
+};
+
+export const borrowLimit = (membership: unknown): number => {
+	const mbrship = MembershipSchema.parse(membership);
+	if (mbrship === "basic") {
+		return 2;
+	} else if (mbrship === "premium") {
+		return 5;
 	} else {
-		return false;
+		throw new Error("Not a valid membership");
 	}
 };
 
