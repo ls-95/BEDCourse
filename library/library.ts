@@ -63,12 +63,12 @@ export const borrowBook = (title: unknown, memberId: unknown): Loan => {
 	return registerLoan(loanId, book.title, memberId);
 };
 
-export const canBorrow = (member: unknown): boolean => {
+export const canBorrow = (member: unknown, count = 1): boolean => {
 	const membership = MemberSchema.parse(member);
 	if (membership.membership === "basic") {
-		return membership.booksOnLoan < 2;
+		return membership.booksOnLoan + count <= 2;
 	} else if (membership.membership === "premium") {
-		return membership.booksOnLoan < 5;
+		return membership.booksOnLoan + count <= 5;
 	} else {
 		return false;
 	}
@@ -87,11 +87,10 @@ export const borrowBooks = (titles: unknown, member: unknown): Loan[] => {
 	const validTitles = BookTitlesSchema.parse(titles);
 	const mbr = MemberSchema.parse(member);
 
-	const result = validTitles.map((t) => {
-		const books = findBook(t);
-		const loanIds = checkOutBook(books);
-		return registerLoan(loanIds, books.title, mbr.id);
-	});
-
-	return result;
+	if (canBorrow(member, validTitles.length)) {
+		const result = validTitles.map((t) => borrowBook(t, mbr.id));
+		return result;
+	} else {
+		throw new Error("Borrowing limit reached");
+	}
 };

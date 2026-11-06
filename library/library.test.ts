@@ -102,7 +102,7 @@ describe("Library Unit Tests", () => {
 		expect(member).toBe(false);
 	});
 
-	test("premium member with 5 books can borrow", () => {
+	test("premium member with 3 books can borrow", () => {
 		expect(() =>
 			canBorrow({
 				id: 5,
@@ -125,5 +125,73 @@ describe("Library Unit Tests", () => {
 		expect(titles[0].memberId).toBe(7);
 		expect(titles[1].title).toBe("neuromancer");
 		expect(titles[1].memberId).toBe(7);
+	});
+
+	test("borrowBooks lets a member borrow multiple books", () => {
+		const titles = borrowBooks(["dune", "neuromancer"], {
+			id: 5,
+			name: "Rowan Atkinson",
+			membership: "premium",
+			booksOnLoan: 1,
+		});
+		expect(titles[0].title).toBe("dune");
+		expect(titles[0].memberId).toBe(5);
+		expect(titles[1].title).toBe("neuromancer");
+		expect(titles[1].memberId).toBe(5);
+	});
+
+	test("borrowBooks throws an error when basic member wants to borrow too many books", () => {
+		expect(() =>
+			borrowBooks(["dune", "neuromancer"], {
+				id: 8,
+				name: "John Cleese",
+				membership: "basic",
+				booksOnLoan: 1,
+			}),
+		).toThrow("Borrowing limit reached");
+	});
+
+	test("borrowBooks throws an error when book has no copies available to borrow", () => {
+		expect(() =>
+			borrowBooks(["dune", "neuromancer", "foundation"], {
+				id: 10,
+				name: "David Jason",
+				membership: "premium",
+				booksOnLoan: 2,
+			}),
+		).toThrow("No copies available");
+	});
+
+	test("borrowBooks throws an error when the array of titles is empty", () => {
+		expect(() =>
+			borrowBooks([], {
+				id: 11,
+				name: "Stephen Fry",
+				membership: "premium",
+				booksOnLoan: 4,
+			}),
+		).toThrow();
+	});
+
+	test("borrowBooks throws an error when there are too many titles: 4", () => {
+		expect(() =>
+			borrowBooks(["dune", "neuromancer", "foundation", "harry potter"], {
+				id: 12,
+				name: "Hugh Laurie",
+				membership: "premium",
+				booksOnLoan: 1,
+			}),
+		).toThrow();
+	});
+
+	test("borrowBooks throws an error when a title is not in the catalogue", () => {
+		expect(() =>
+			borrowBooks(["the fellowship of the ring"], {
+				id: 13,
+				name: "Catherine Tate",
+				membership: "basic",
+				booksOnLoan: 1,
+			}),
+		).toThrow();
 	});
 });
