@@ -1,6 +1,7 @@
 import { describe, expect, test } from "vitest";
 import {
 	borrowBooks,
+	borrowLimit,
 	canBorrow,
 	checkOutBook,
 	findBook,
@@ -113,7 +114,7 @@ describe("Library Unit Tests", () => {
 		).toThrow();
 	});
 
-	//borrowBooks
+	//borrowBooks Unit Tests
 	test("borrowBooks accepts mulitple titles", () => {
 		const titles = borrowBooks(["dune", "neuromancer"], {
 			id: 7,
@@ -204,5 +205,16 @@ describe("Library Unit Tests", () => {
 				booksOnLoan: 0,
 			}),
 		).toThrow();
+	});
+
+	//borrowLimit Unit Tests
+	test("borrowLimit returns 2 with a basic membership", () => {
+		const result = borrowLimit("basic");
+		expect(result).toBe(2);
+	});
+
+	test("borrowLimit returns 5 with a premium membership", () => {
+		const result = borrowLimit("premium");
+		expect(result).toBe(5);
 	});
 });
