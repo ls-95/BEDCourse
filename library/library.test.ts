@@ -115,7 +115,7 @@ describe("Library Unit Tests", () => {
 
 	//borrowBooks
 	test("borrowBooks accepts mulitple titles", () => {
-		const titles = borrowBooks(["dune", "foundation"], {
+		const titles = borrowBooks(["dune", "neuromancer"], {
 			id: 7,
 			name: "Michael Jackson",
 			membership: "premium",
@@ -123,7 +123,7 @@ describe("Library Unit Tests", () => {
 		});
 		expect(titles[0].title).toBe("dune");
 		expect(titles[0].memberId).toBe(7);
-		expect(titles[1].title).toBe("foundation");
+		expect(titles[1].title).toBe("neuromancer");
 		expect(titles[1].memberId).toBe(7);
 	});
 });
