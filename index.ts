@@ -1,4 +1,5 @@
 import "./instrument.js";
+import * as Sentry from "@sentry/node";
 import express from "express";
 import Author from "./models/Authors.ts";
 import Book from "./models/Books.ts";
@@ -40,6 +41,10 @@ testDBConnection();
 
 app.get("/", (_req, res) => {
 	res.send("Welcome!");
+});
+
+app.get("/debug-sentry", function mainHandler(_req, _res) {
+	throw new Error("My first Sentry error!");
 });
 
 const allowedSorts = ["title", "published_year", "genre"];
@@ -378,6 +383,8 @@ app.delete("/books/:id", async (req, res) => {
 		res.status(500).send("Something went wrong");
 	}
 });
+
+Sentry.setupExpressErrorHandler(app);
 
 app.listen(port, () => {
 	console.log(`The server is running on port: ${port}`);
