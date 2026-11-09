@@ -39,6 +39,8 @@ const testDBConnection = async () => {
 };
 testDBConnection();
 
+Sentry.setupExpressErrorHandler(app);
+
 app.get("/", (_req, res) => {
 	res.send("Welcome!");
 });
@@ -383,8 +385,6 @@ app.delete("/books/:id", async (req, res) => {
 		res.status(500).send("Something went wrong");
 	}
 });
-
-Sentry.setupExpressErrorHandler(app);
 
 app.listen(port, () => {
 	console.log(`The server is running on port: ${port}`);

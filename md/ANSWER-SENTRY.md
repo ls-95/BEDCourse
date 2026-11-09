@@ -19,3 +19,9 @@ The information that is mentioned about the error is related to the error messag
 The information mentioned about the request and the visitor is the request itself (the method, url and the headers), the ip address and the browser used.
 
 Then the information mentioned about the computer used is the operating system, Node.js version, environment, computer name, processor, memory, time of the error and the breadcrumbs.
+
+## Exercise 3
+
+When I moved the handler above the routes, I saw no difference and the error still arrived in Sentry, the event went up by one.
+
+I think that the hanlder should be at the bottom, after the routes, as Express reads code from top to bottom. If the handler is above the routes, Express has already passed it before the error happens so it should not catch the error. That is why it needs to be at the bottom after all the routes.
