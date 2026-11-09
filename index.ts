@@ -1,3 +1,4 @@
+import "./instrument.js";
 import express from "express";
 import Author from "./models/Authors.ts";
 import Book from "./models/Books.ts";
