@@ -25,3 +25,15 @@ Then the information mentioned about the computer used is the operating system, 
 When I moved the handler above the routes, I saw no difference and the error still arrived in Sentry, the event went up by one.
 
 I think that the hanlder should be at the bottom, after the routes, as Express reads code from top to bottom. If the handler is above the routes, Express has already passed it before the error happens so it should not catch the error. That is why it needs to be at the bottom after all the routes.
+
+# Medium
+
+## Exercise 4
+
+![Resolved Issues](../sentry-screenshots/resolved-issues.png);
+
+
+setupExpressErrorHandler only reports errors that weren't caught. The errors inside the try/catch blocks were caught and a 500 response was sent. Since they are already handled, they are not passed on.
+
+
+Sentry grouped the failed requests into one issue not separate issues, as they all failed for the same reason (wrong db password). It is useful because instead of seeing so many entries for the same problem, I only see one. It would waste time to have to resolve each one separately.
