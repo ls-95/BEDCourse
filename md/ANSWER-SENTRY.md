@@ -37,3 +37,11 @@ setupExpressErrorHandler only reports errors that weren't caught. The errors ins
 
 
 Sentry grouped the failed requests into one issue not separate issues, as they all failed for the same reason (wrong db password). It is useful because instead of seeing so many entries for the same problem, I only see one. It would waste time to have to resolve each one separately.
+
+## Exercise 5
+
+![Breadcrumbs](../sentry-screenshots/breadcrumbs.png);
+
+![Tags](../sentry-screenshots/tags.png);
+
+![Feature Books](../sentry-screenshots/feature-books.png);
