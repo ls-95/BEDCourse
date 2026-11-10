@@ -45,3 +45,12 @@ Sentry grouped the failed requests into one issue not separate issues, as they a
 ![Tags](../sentry-screenshots/tags.png);
 
 ![Feature Books](../sentry-screenshots/feature-books.png);
+
+
+A breadcrumb is a history of what happened before the error. So it is a 'trail of breadcrumbs' that lead up to the error. It logs the actions, network requests or console log message in the order to show the chain reaction.
+
+Breadcrumbs can be helpful in a team as it will show exactly the moment, for example, an app crashes. Someone is buying a product online and when they click pay, the app crashes and the breadcrumbs will show all the events that lead up to that moment, so you can pin point the exact problem that happened.
+
+A tag is a key value label attached to an error that will explain the environment. It will explain the characteristics of the error, what operating system was used, what browser, what server environment was used at the moment of the error.
+
+Tags can help notice if there is a pattern in errors. Maybe it is the browser that is causing the crashed app and the same browser would appear in all of the issues. This can help the team fix problems faster.
