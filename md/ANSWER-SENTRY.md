@@ -54,3 +54,11 @@ Breadcrumbs can be helpful in a team as it will show exactly the moment, for exa
 A tag is a key value label attached to an error that will explain the environment. It will explain the characteristics of the error, what operating system was used, what browser, what server environment was used at the moment of the error.
 
 Tags can help notice if there is a pattern in errors. Maybe it is the browser that is causing the crashed app and the same browser would appear in all of the issues. This can help the team fix problems faster.
+
+## Exercise 6
+
+Adding a helper function makes the code much cleaner and easier to maintain, especially when there a many catch blocks. It avoids repeated code.
+
+captureExpection records the actual error which includes the message and the stack trace. It helps developers understand what went wrong.
+
+setTag gives additional context by categorising errors. It helps to filter and organise errors.
