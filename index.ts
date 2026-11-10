@@ -51,7 +51,6 @@ const allowedSorts = ["title", "published_year", "genre"];
 
 app.get("/books", async (req, res) => {
 	Sentry.addBreadcrumb({ message: "Fetch all books", level: "info" });
-	Sentry.setTag("feature", "books");
 	const { genre, sort } = req.query;
 	if (typeof sort === "string" && !allowedSorts.includes(sort)) {
 		return res.status(400).json({ error: "Invalid sort column" });
@@ -75,6 +74,7 @@ app.get("/books", async (req, res) => {
 		});
 		res.json(books);
 	} catch (error) {
+		Sentry.setTag("feature", "books");
 		Sentry.captureException(error);
 		console.error(error);
 		res.status(500).send("Something went wrong");
@@ -83,11 +83,11 @@ app.get("/books", async (req, res) => {
 
 app.get("/authors", async (_req, res) => {
 	Sentry.addBreadcrumb({ message: "Fetch all authors", level: "info" });
-	Sentry.setTag("feature", "authors");
 	try {
 		const authors = await Author.findAll();
 		res.json(authors);
 	} catch (error) {
+		Sentry.setTag("feature", "authors");
 		Sentry.captureException(error);
 		console.error(error);
 		res.status(500).send("Something went wrong");
@@ -96,11 +96,11 @@ app.get("/authors", async (_req, res) => {
 
 app.get("/members", async (_req, res) => {
 	Sentry.addBreadcrumb({ message: "Fetch all members", level: "info" });
-	Sentry.setTag("feature", "members");
 	try {
 		const members = await Member.findAll();
 		res.json(members);
 	} catch (error) {
+		Sentry.setTag("feature", "members");
 		Sentry.captureException(error);
 		console.error(error);
 		res.status(500).send("Something went wrong");
@@ -109,7 +109,6 @@ app.get("/members", async (_req, res) => {
 
 app.get("/loans", async (_req, res) => {
 	Sentry.addBreadcrumb({ message: "Fetch all loans", level: "info" });
-	Sentry.setTag("feature", "loans");
 	try {
 		const loans = await Loan.findAll({
 			include: [
@@ -119,6 +118,7 @@ app.get("/loans", async (_req, res) => {
 		});
 		res.json(loans);
 	} catch (error) {
+		Sentry.setTag("feature", "loans");
 		Sentry.captureException(error);
 		console.error(error);
 		res.status(500).send("Something went wrong");
@@ -127,7 +127,6 @@ app.get("/loans", async (_req, res) => {
 
 app.get("/books/:id", async (req, res) => {
 	Sentry.addBreadcrumb({ message: "Fetch books by id", level: "info" });
-	Sentry.setTag("feature", "books");
 	const { id } = req.params;
 	if (!Number.isInteger(Number(id))) {
 		return res.status(400).send("Please enter a numeric id.");
@@ -139,6 +138,7 @@ app.get("/books/:id", async (req, res) => {
 		}
 		res.json(book);
 	} catch (error) {
+		Sentry.setTag("feature", "books");
 		Sentry.captureException(error);
 		console.error(error);
 		res.status(500).send("Something went wrong");
@@ -150,7 +150,6 @@ app.get("/members/:id/loans", async (req, res) => {
 		message: "Fetch all loans by member id",
 		level: "info",
 	});
-	Sentry.setTag("feature", "loans");
 	const { id } = req.params;
 	if (!Number.isInteger(Number(id))) {
 		return res.status(400).send("Please enter a numeric id.");
@@ -171,6 +170,7 @@ app.get("/members/:id/loans", async (req, res) => {
 		});
 		res.status(200).json(loans);
 	} catch (error) {
+		Sentry.setTag("feature", "loans");
 		Sentry.captureException(error);
 		console.error(error);
 		res.status(500).send("Something went wrong");
@@ -182,7 +182,6 @@ app.get("/authors/:id/books", async (req, res) => {
 		message: "Fetch all books by author id",
 		level: "info",
 	});
-	Sentry.setTag("feature", "books");
 	const { id } = req.params;
 	if (!Number.isInteger(Number(id))) {
 		return res.status(400).send("Please enter a numeric id.");
@@ -199,6 +198,7 @@ app.get("/authors/:id/books", async (req, res) => {
 		});
 		res.status(200).json(books);
 	} catch (error) {
+		Sentry.setTag("feature", "books");
 		Sentry.captureException(error);
 		console.error(error);
 		res.status(500).send("Something went wrong");
@@ -207,7 +207,6 @@ app.get("/authors/:id/books", async (req, res) => {
 
 app.post("/books", async (req, res) => {
 	Sentry.addBreadcrumb({ message: "Send a book", level: "info" });
-	Sentry.setTag("feature", "books");
 	const { title, genre, published_year, author_id } = req.body;
 	if (!title) {
 		return res.status(400).send("Please add a title.");
@@ -221,6 +220,7 @@ app.post("/books", async (req, res) => {
 		});
 		res.json(book);
 	} catch (error: any) {
+		Sentry.setTag("feature", "books");
 		Sentry.captureException(error);
 		if (error.code === "23503") {
 			return res.status(400).json({
@@ -234,7 +234,6 @@ app.post("/books", async (req, res) => {
 
 app.post("/authors", async (req, res) => {
 	Sentry.addBreadcrumb({ message: "Send an author", level: "info" });
-	Sentry.setTag("feature", "authors");
 	const { name } = req.body;
 	if (!name) {
 		return res.status(400).send("Please add a name.");
@@ -243,6 +242,7 @@ app.post("/authors", async (req, res) => {
 		const author = await Author.create({ name });
 		res.json(author);
 	} catch (error) {
+		Sentry.setTag("feature", "authors");
 		Sentry.captureException(error);
 		console.error(error);
 		res.status(500).send("Something went wrong");
@@ -251,7 +251,6 @@ app.post("/authors", async (req, res) => {
 
 app.post("/loans", async (req, res) => {
 	Sentry.addBreadcrumb({ message: "Send a loan", level: "info" });
-	Sentry.setTag("feature", "loans");
 	const { member_id, book_id, loan_date, returned_at } = req.body;
 	if (!member_id || !book_id) {
 		return res.status(400).send("Please enter the member id and book id.");
@@ -265,6 +264,7 @@ app.post("/loans", async (req, res) => {
 		});
 		res.json(loan);
 	} catch (error) {
+		Sentry.setTag("feature", "loans");
 		Sentry.captureException(error);
 		console.error(error);
 		res.status(500).send("Something went wrong");
@@ -273,7 +273,6 @@ app.post("/loans", async (req, res) => {
 
 app.put("/books/:id", async (req, res) => {
 	Sentry.addBreadcrumb({ message: "Update a whole book by id", level: "info" });
-	Sentry.setTag("feature", "books");
 	const { id } = req.params;
 	const { title, genre, publishedYear, authorId } = req.body;
 	if (!Number.isInteger(Number(id))) {
@@ -296,6 +295,7 @@ app.put("/books/:id", async (req, res) => {
 		});
 		res.json(book);
 	} catch (error) {
+		Sentry.setTag("feature", "books");
 		Sentry.captureException(error);
 		console.error(error);
 		res.status(500).send("Something went wrong");
@@ -307,7 +307,6 @@ app.patch("/books/:id", async (req, res) => {
 		message: "Update parts of a book by id",
 		level: "info",
 	});
-	Sentry.setTag("feature", "books");
 	const { id } = req.params;
 	const { title, genre, publishedYear, authorId } = req.body;
 	if (!req.body || Object.keys(req.body).length === 0) {
@@ -332,6 +331,7 @@ app.patch("/books/:id", async (req, res) => {
 
 		res.json(book);
 	} catch (error) {
+		Sentry.setTag("feature", "books");
 		Sentry.captureException(error);
 		console.error(error);
 		res.status(500).send("Something went wrong");
@@ -340,7 +340,6 @@ app.patch("/books/:id", async (req, res) => {
 
 app.delete("/books/:id", async (req, res) => {
 	Sentry.addBreadcrumb({ message: "Delete a book", level: "info" });
-	Sentry.setTag("feature", "books");
 	const { id } = req.params;
 	if (!Number.isInteger(Number(id))) {
 		return res.status(400).send("Please enter a numeric id.");
@@ -353,6 +352,7 @@ app.delete("/books/:id", async (req, res) => {
 		await book.destroy();
 		res.status(200).json({ message: "Book deleted successfully", book });
 	} catch (error) {
+		Sentry.setTag("feature", "books");
 		Sentry.captureException(error);
 		console.error(error);
 		res.status(500).send("Something went wrong");
