@@ -8,9 +8,9 @@ DSN is in the .env file (which is in the .gitignore file) as it is the informati
 
 ## Exercise 2
 
-![Dashboard](../sentry-screenshots/dashboard-exercise-2.png);
+![Dashboard](../sentry-screenshots/dashboard-exercise-2.png)
 
-![First Issue](../sentry-screenshots/first-sentry-error.png);
+![First Issue](../sentry-screenshots/first-sentry-error.png)
 
 The information that Sentry has still recorded even without adding extra information is about the error, about the request and the visitor and then about the computer.
 
@@ -30,7 +30,7 @@ I think that the hanlder should be at the bottom, after the routes, as Express r
 
 ## Exercise 4
 
-![Resolved Issues](../sentry-screenshots/resolved-issues.png);
+![Resolved Issues](../sentry-screenshots/resolved-issues.png)
 
 
 setupExpressErrorHandler only reports errors that weren't caught. The errors inside the try/catch blocks were caught and a 500 response was sent. Since they are already handled, they are not passed on.
@@ -40,11 +40,11 @@ Sentry grouped the failed requests into one issue not separate issues, as they a
 
 ## Exercise 5
 
-![Breadcrumbs](../sentry-screenshots/breadcrumbs.png);
+![Breadcrumbs](../sentry-screenshots/breadcrumbs.png)
 
-![Tags](../sentry-screenshots/tags.png);
+![Tags](../sentry-screenshots/tags.png)
 
-![Feature Books](../sentry-screenshots/feature-books.png);
+![Feature Books](../sentry-screenshots/feature-books.png)
 
 
 A breadcrumb is a history of what happened before the error. So it is a 'trail of breadcrumbs' that lead up to the error. It logs the actions, network requests or console log message in the order to show the chain reaction.
