@@ -1,0 +1,8 @@
+# Easy
+
+## Exercise 1
+
+docker ps shows a list of all the containers running. Each one shows the ID, the image, the name, how long it has been running, its status and the port.
+The STATUS column tells you that sonarqube is running, Up 4 minutes (it has been running for 4 minutes). The PORTS column says 0.0.0.0:9000->9000/tcp which tells us that sonarqube is running on port 9000.
+
+Docker keeps sonarqube separate from the rest of my computer, so i dont have to install programs it needs. So I can start and remove it with one command. My compose file lets me run the same setup on another computer.
