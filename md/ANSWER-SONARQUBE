@@ -17,7 +17,7 @@ The issue I got was "Promises must be awaited, end with a call to .catch, end wi
 
 ## Exercise 3
 
-ISSUE 1:
+**ISSUE 1:**
 
 rule name: Promises should not be left unhandled (typescript:S9383)
 file name: src/app.ts
@@ -26,7 +26,7 @@ what is wrong: An async function is called without waiting for it. Errors can be
 what compliant code would look like: void testDBConnection();
 agree on problem: Yes because the error could happen later and my code would not notice.
 
-ISSUE 2:
+**ISSUE 2:**
 
 rule name: "Number.isNaN()" should be used to check for "NaN" value (typescript:S6679) 
 file name: src/app.ts
@@ -35,7 +35,7 @@ what is wrong: This is an old way to check for 'NaN'
 what compliant code would look like: if(!Number.isNaN(count))
 agree on problem: Yes because a value compared to itself will always be true unless it is 'NaN'. This can be confused and Number.isNaN() is more clear.
 
-ISSUE 3:
+**ISSUE 3:**
 
 rule name: "if/else if" chains and "switch" cases should not have the same condition (typescript:S1862)
 file name: src/app.ts
