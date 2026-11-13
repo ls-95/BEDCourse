@@ -37,7 +37,7 @@ const testDBConnection = async () => {
 		console.error(`Unable to connect to the database: ${error}`);
 	}
 };
-void testDBConnection();
+testDBConnection();
 
 app.get("/", (_req, res) => {
 	res.send("Welcome!");
