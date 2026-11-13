@@ -372,4 +372,17 @@ app.delete("/books/:id", async (req, res) => {
 	}
 });
 
+function demo() {
+	const count = 5;
+	if (count === count) {
+		console.log("always true");
+	}
+	if (count > 1) {
+		console.log("a");
+	} else if (count > 1) {
+		console.log("b");
+	}
+}
+demo();
+
 Sentry.setupExpressErrorHandler(app);

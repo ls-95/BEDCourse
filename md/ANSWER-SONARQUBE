@@ -14,3 +14,37 @@ Docker keeps sonarqube separate from the rest of my computer, so i dont have to 
 My project passed the quality gate with 1 issue. 
 
 The issue I got was "Promises must be awaited, end with a call to .catch, end with a call to .then with a rejection handler or be explicitly marked as ignored with the `void` operator". The code in question was my testDBConnection function I created during the sequelized assignment. To fix the issue, I would need to add void in front of the call.
+
+## Exercise 3
+
+ISSUE 1:
+
+rule name: Promises should not be left unhandled (typescript:S9383)
+file name: src/app.ts
+line: L40
+what is wrong: An async function is called without waiting for it. Errors can be missed and later code can run before the result is ready.
+what compliant code would look like: void testDBConnection();
+agree on problem: Yes because the error could happen later and my code would not notice.
+
+ISSUE 2:
+
+rule name: "Number.isNaN()" should be used to check for "NaN" value (typescript:S6679) 
+file name: src/app.ts
+line: L377
+what is wrong: This is an old way to check for 'NaN'
+what compliant code would look like: if(!Number.isNaN(count))
+agree on problem: Yes because a value compared to itself will always be true unless it is 'NaN'. This can be confused and Number.isNaN() is more clear.
+
+ISSUE 3:
+
+rule name: "if/else if" chains and "switch" cases should not have the same condition (typescript:S1862)
+file name: src/app.ts
+line: L382
+what is wrong: I used the same conditions in an if/else if chain, meaning that the second one will never run because the first one already caught it.
+what compliant code would look like: 
+if (count > 1) { 
+  console.log ("a") 
+} else { 
+  console.log("b") 
+}
+agree on problem: Yes because the second one can never run. It makes the code confusing and adds extra code for no reason.
