@@ -1,6 +1,7 @@
 {
 	"devDependencies": {
 		"@biomejs/biome": "2.5.14",
+		"@sonar/scan": "^5.1.0",
 		"@types/express": "^5.0.6",
 		"@types/pg": "^8.23.1",
 		"@types/supertest": "^7.2.1",

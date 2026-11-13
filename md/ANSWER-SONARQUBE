@@ -6,3 +6,11 @@ docker ps shows a list of all the containers running. Each one shows the ID, the
 The STATUS column tells you that sonarqube is running, Up 4 minutes (it has been running for 4 minutes). The PORTS column says 0.0.0.0:9000->9000/tcp which tells us that sonarqube is running on port 9000.
 
 Docker keeps sonarqube separate from the rest of my computer, so i dont have to install programs it needs. So I can start and remove it with one command. My compose file lets me run the same setup on another computer.
+
+## Exercise 2
+
+![SonarQube Overview](../sonarqube-screenshots/sonarqube-overview.png)
+
+My project passed the quality gate with 1 issue. 
+
+The issue I got was "Promises must be awaited, end with a call to .catch, end with a call to .then with a rejection handler or be explicitly marked as ignored with the `void` operator". The code in question was my testDBConnection function I created during the sequelized assignment. To fix the issue, I would need to add void in front of the call.
