@@ -64,3 +64,16 @@ Sentry sends a report when a real user gets an error in the live app.
 
 
 ![Fixed Issues](../sonarqube-screenshots/fixed-issues.png)
+
+# Medium
+
+## Exercise 4
+
+**Sonarqube token:** Someone could log in as me to my sonarqube and see my project issues and change or delete things.
+
+**Database password:** They could read, change or delete all the data in my database.
+
+**Sentry DSN:** They could send fake errors to my sentry so my real errors get lost in all the errors.
+
+
+The settings are saved in one file so I dont have to type or copy a long commande each time. It is shorter and easier to read and everyone on the team uses the same settings. The secrets stay out of the file and in .env.
