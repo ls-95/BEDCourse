@@ -43,10 +43,6 @@ app.get("/", (_req, res) => {
 	res.send("Welcome!");
 });
 
-// app.get("/debug-sentry", function mainHandler(_req, _res) {
-// 	throw new Error("My first Sentry error!");
-// });
-
 const allowedSorts = ["title", "published_year", "genre"];
 
 app.get("/books", async (req, res) => {
@@ -75,8 +71,6 @@ app.get("/books", async (req, res) => {
 		res.json(books);
 	} catch (error) {
 		reportError(error, "books");
-		// Sentry.setTag("feature", "books");
-		// Sentry.captureException(error);
 		console.error(error);
 		res.status(500).send("Something went wrong");
 	}
@@ -89,8 +83,6 @@ app.get("/authors", async (_req, res) => {
 		res.json(authors);
 	} catch (error) {
 		reportError(error, "authors");
-		// Sentry.setTag("feature", "authors");
-		// Sentry.captureException(error);
 		console.error(error);
 		res.status(500).send("Something went wrong");
 	}
@@ -103,8 +95,6 @@ app.get("/members", async (_req, res) => {
 		res.json(members);
 	} catch (error) {
 		reportError(error, "members");
-		// Sentry.setTag("feature", "members");
-		// Sentry.captureException(error);
 		console.error(error);
 		res.status(500).send("Something went wrong");
 	}
@@ -122,8 +112,6 @@ app.get("/loans", async (_req, res) => {
 		res.json(loans);
 	} catch (error) {
 		reportError(error, "loans");
-		// Sentry.setTag("feature", "loans");
-		// Sentry.captureException(error);
 		console.error(error);
 		res.status(500).send("Something went wrong");
 	}
@@ -143,8 +131,6 @@ app.get("/books/:id", async (req, res) => {
 		res.json(book);
 	} catch (error) {
 		reportError(error, "books");
-		// Sentry.setTag("feature", "books");
-		// Sentry.captureException(error);
 		console.error(error);
 		res.status(500).send("Something went wrong");
 	}
@@ -176,8 +162,6 @@ app.get("/members/:id/loans", async (req, res) => {
 		res.status(200).json(loans);
 	} catch (error) {
 		reportError(error, "loans");
-		// Sentry.setTag("feature", "loans");
-		// Sentry.captureException(error);
 		console.error(error);
 		res.status(500).send("Something went wrong");
 	}
@@ -205,8 +189,6 @@ app.get("/authors/:id/books", async (req, res) => {
 		res.status(200).json(books);
 	} catch (error) {
 		reportError(error, "books");
-		// Sentry.setTag("feature", "books");
-		// Sentry.captureException(error);
 		console.error(error);
 		res.status(500).send("Something went wrong");
 	}
@@ -214,7 +196,7 @@ app.get("/authors/:id/books", async (req, res) => {
 
 app.post("/books", async (req, res) => {
 	Sentry.addBreadcrumb({ message: "Send a book", level: "info" });
-	const { title, genre, published_year, author_id } = req.body;
+	const { title, genre, publishedYear, authorId } = req.body;
 	if (!title) {
 		return res.status(400).send("Please add a title.");
 	}
@@ -222,19 +204,17 @@ app.post("/books", async (req, res) => {
 		const book = await Book.create({
 			title,
 			genre,
-			publishedYear: published_year,
-			authorId: author_id,
+			publishedYear,
+			authorId,
 		});
 		res.json(book);
 	} catch (error: any) {
-		reportError(error, "books");
-		// Sentry.setTag("feature", "books");
-		// Sentry.captureException(error);
 		if (error.code === "23503") {
 			return res.status(400).json({
-				error: "Something went wrong",
+				error: "Author does not exist",
 			});
 		}
+		reportError(error, "books");
 		console.error(error);
 		res.status(500).send("Something went wrong");
 	}
@@ -251,8 +231,6 @@ app.post("/authors", async (req, res) => {
 		res.json(author);
 	} catch (error) {
 		reportError(error, "authors");
-		// Sentry.setTag("feature", "authors");
-		// Sentry.captureException(error);
 		console.error(error);
 		res.status(500).send("Something went wrong");
 	}
@@ -260,22 +238,20 @@ app.post("/authors", async (req, res) => {
 
 app.post("/loans", async (req, res) => {
 	Sentry.addBreadcrumb({ message: "Send a loan", level: "info" });
-	const { member_id, book_id, loan_date, returned_at } = req.body;
-	if (!member_id || !book_id) {
+	const { memberId, bookId, loanDate, returnedAt } = req.body;
+	if (!memberId || !bookId) {
 		return res.status(400).send("Please enter the member id and book id.");
 	}
 	try {
 		const loan = await Loan.create({
-			memberId: member_id,
-			bookId: book_id,
-			loanDate: loan_date,
-			returnedAt: returned_at,
+			memberId,
+			bookId,
+			loanDate,
+			returnedAt,
 		});
 		res.json(loan);
 	} catch (error) {
 		reportError(error, "loans");
-		// Sentry.setTag("feature", "loans");
-		// Sentry.captureException(error);
 		console.error(error);
 		res.status(500).send("Something went wrong");
 	}
@@ -306,8 +282,6 @@ app.put("/books/:id", async (req, res) => {
 		res.json(book);
 	} catch (error) {
 		reportError(error, "books");
-		// Sentry.setTag("feature", "books");
-		// Sentry.captureException(error);
 		console.error(error);
 		res.status(500).send("Something went wrong");
 	}
@@ -343,8 +317,6 @@ app.patch("/books/:id", async (req, res) => {
 		res.json(book);
 	} catch (error) {
 		reportError(error, "books");
-		// Sentry.setTag("feature", "books");
-		// Sentry.captureException(error);
 		console.error(error);
 		res.status(500).send("Something went wrong");
 	}
@@ -365,8 +337,6 @@ app.delete("/books/:id", async (req, res) => {
 		res.status(200).json({ message: "Book deleted successfully", book });
 	} catch (error) {
 		reportError(error, "books");
-		// Sentry.setTag("feature", "books");
-		// Sentry.captureException(error);
 		console.error(error);
 		res.status(500).send("Something went wrong");
 	}
