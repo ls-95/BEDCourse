@@ -96,3 +96,9 @@ The settings are saved in one file so I dont have to type or copy a long command
 **The difference:** only app.test.ts changes. Before it counted 22 lines of code. After I indicated which files are tests, it didn't count them. app.ts stayed the same. The lines are no longer counted because sonarqube now sees app.test.ts as a test file, not as code.
 
 If the list includes code I didn't write, like node_modules, I can't fix it as it belongs to someone else and the changes will disappear next time npm install is run. Also it hides real issues as it would be messy to know which ones are because of my code and which ones aren't.
+
+## Exercise 6
+
+I don't have anymore issues to fix. I only had one issue at the beginning of the assingnment. I created two more for a different exercise.
+
+npm run test is still green with the tests I added.
