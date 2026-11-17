@@ -37,3 +37,23 @@ Memory stores the earlier message of the chat. The context window is how many re
 I noticed that I didn't matter if I changed the context while I was in the same chat but when I 'started fresh', then I saw some differences. When the context window was set to 1, I asked it stated three facts. I asked it about the first fact and could only venture a guess due to the answer it gave from my second fact. With no memory, it did still know my name.
 
 If the context window is set to 1000, it needs to read the past 1000 (or how many there are below that if it hasn't reached 1000) messages every time. It also means that more tokens which means it costs more money. It will also take the agent more time to reply as there are more things to read and old messages might not be relevant anymore to more recent questions.
+
+## Exercise 3
+
+![Open Weather Map Question 1](./screenshots/open-weather-map-1.png)
+The Open Weather Map tool did not get called.
+
+![Open Weather Map Question 2](./screenshots/open-weather-map-2.png)
+The Open Weather Map tool did not get called but that might have been because the AI agent lagged and the question did even get answered.
+
+![Open Weather Map Question 3](./screenshots/open-weather-map-3.png)
+The Open Weather Map tool did not get called but that might have been because the AI agent lagged and the question did even get answered.
+
+**Questions:**
+
+In my logs, the agent did not call Get weather for the umbrella question. It asked me for my city instead.
+The agent decides by itself whether to use a tool. Nobody told it when. In my test, it chose not to use Get weather even though the question was about the weather.
+
+An automation would always run the weather step. My agent did not. It asked me a question instead of calling the tool. This shows the agent decides the steps, and the steps are not fixed.
+
+The weather tool could be used by other AI apps that use MCP, not only inside n8n. One advantage is that it is built once and works in many apps.
