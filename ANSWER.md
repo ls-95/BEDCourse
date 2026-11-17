@@ -57,3 +57,17 @@ The agent decides by itself whether to use a tool. Nobody told it when. In my te
 An automation would always run the weather step. My agent did not. It asked me a question instead of calling the tool. This shows the agent decides the steps, and the steps are not fixed.
 
 The weather tool could be used by other AI apps that use MCP, not only inside n8n. One advantage is that it is built once and works in many apps.
+
+# Medium
+
+## Exercise 4
+
+![Open Meteo](./screenshots/air-quality.png)
+
+**API:** An API is a set of rules and protocols that allows different software applications to communicate and share data with each other. In a vending machine, it is the buttons and the list of snacks you can pick. Open-Meteo's API is its list of what I can ask for, like air quality.
+
+**HTTP request:** An HTTP request is one specific question I send. In a vending machine, it is pressing one button. When I open the Open-Meteo URL in the browser, I send one HTTP request.
+
+**Function:** A function is the specific action I ask for. In a vending machine, it is one snack on the list. For Open-Meteo it is /v1/air-quality.
+
+**Example from my Express API:** GET /books is a function in my API. When I call it from Insomnia, that is an HTTP request. All the routes together are my API.
