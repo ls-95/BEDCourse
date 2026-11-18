@@ -91,3 +91,24 @@ After: In the structured prompt test, the agent immediately called both Get weat
 The biggest difference the six parts made were the tools. Without clear instructions on which weather tools to use and when to use them, the agent ignored them and just gave generic workout suggestions instead of checking the weather.
 
 A huge message wastes tokens if it is in every single message and it costs more. Skills only load when needed. Also, too many rules in one prompt can confuse the AI and the instructions can get mixed up. Skills keep the agent focused on one job at a time.
+
+## Exercise 6
+
+| What I broke  | Which node failed | Error message (short) | What the message told me |
+| ------------- | ----------------- | --------------------- | ------------------------ |
+| API KEY       | Get weather       | Authorization failed - Invalid api key  | The the api key is invalid  |
+| Misspelt city | Get weather       | Resource requested not found - city not found | That the city in Get weather is not correct  |
+| Misspelt URL  | Get air quality   | None                  | That it doesn't need both nodes to be able to give a response |
+ 
+
+ ![Wrong API Key](./screenshots/wrong-api-key.png)
+
+ ![Wrong City](./screenshots/wrong-city.png)
+
+ ![Wrong URL](./screenshots/wrong-url.png)
+
+ **Questions:** 
+
+ Red errors indicate that something is broken, so it is clear what to fix. A wrong answer looks like a success, so the workflow finishes and nothing turns red. A mistake might go unnoticed which means you might use the answer.
+
+ Both show an error message and where it happens. In both, the message is read fird and then find the error location. The difference is that Sentry collects errors from a running app and sends you a report. In n8n you look at the execution yourself, it shows you which node failed.
