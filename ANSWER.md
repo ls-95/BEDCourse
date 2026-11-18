@@ -31,6 +31,10 @@ Asking for my name with context window 0:
 
 ![Ask Question With 0 Context](./screenshots/memory-0.png)
 
+I tried again to add the memory to 0 and got the same result, this time I added an extra message in-between:
+
+![Ask Question With 0 Context (2)](./screenshots/memory-0(2).png)
+
 **Questions:**
 
 Memory stores the earlier message of the chat. The context window is how many recent messages the agent gets to read each time a new one is written. So with no memory, the agent treats each message as the first one. 
