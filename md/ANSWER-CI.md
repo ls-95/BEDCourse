@@ -19,3 +19,16 @@
 ![Failed Build](../screenshots/failed-build.png)
 
 Something did happen for me. Pushing the branch started the workflow because the branch matched the `on` sectoin. The tests did run but the run failed. The node 18 job crashed because a package needs a newer node version. The node 20 job was cancelled because of that failure and the node 22 passed.
+
+## Exercise 2
+
+![Failed Build](../screenshots/jobs-completed.png)
+
+![Failed Build](../screenshots/tests-green.png)
+
+Two jobs ran, the Node versions 20 and 22. The reason why they ran are because both versions are defined in the strategy matrix in the ci.yml file. 
+
+**Question:**
+
+A test can pass on your laptop but fail in CI because the environment may be different. For example, different node versions. In my case, Node 18 caused the tests to fail. Once I removed it and kept only versions 20 and 22, ithe tests passed. 
+Other possible reasons could be because of missing dependencies, different operating systems, file paths, case sensitivity or even timing issues.
