@@ -32,3 +32,13 @@ Two jobs ran, the Node versions 20 and 22. The reason why they ran are because b
 
 A test can pass on your laptop but fail in CI because the environment may be different. For example, different node versions. In my case, Node 18 caused the tests to fail. Once I removed it and kept only versions 20 and 22, ithe tests passed. 
 Other possible reasons could be because of missing dependencies, different operating systems, file paths, case sensitivity or even timing issues.
+
+## Exercise 3
+
+![Failed On Purpose](../screenshots/failing-on-purpose.png)
+
+![Failed On Purpose Test](../screenshots/failed-on-purpose-test.png)
+
+**Question:**
+
+It is better to know about the problem before the merge because then I can fix it on my branch. After merging, the broken code is already on the main branch and it is more complicated to fix.
