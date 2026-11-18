@@ -221,4 +221,8 @@ describe("Library Unit Tests", () => {
 	test("borrowLimit throws an error for incorrect value", () => {
 		expect(() => borrowLimit("free")).toThrow();
 	});
+
+	test("failing test on purpose", () => {
+		expect(1 + 1).toBe(2);
+	});
 });
