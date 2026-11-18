@@ -71,3 +71,23 @@ The weather tool could be used by other AI apps that use MCP, not only inside n8
 **Function:** A function is the specific action I ask for. In a vending machine, it is one snack on the list. For Open-Meteo it is /v1/air-quality.
 
 **Example from my Express API:** GET /books is a function in my API. When I call it from Insomnia, that is an HTTP request. All the routes together are my API.
+
+# Exercise 5
+
+Due to limited tokens, I will only ask one question instead of three.
+
+![Before Structured Prompt](./screenshots/before-prompt.png)
+
+![Structured Prompt](./screenshots/prompt.png)
+
+![After Structured Prompt](./screenshots/after-prompt.png)
+
+**Questions:**
+
+Before: This did not call any tools. The execution log completey ignores the Get weather and Get air quality nodes, gave generic workout suggestions and asked questions about which city I am in, what the weather is like.
+
+After: In the structured prompt test, the agent immediately called both Get weather and Get air quality for Varberg and based its advice on live data.
+
+The biggest difference the six parts made were the tools. Without clear instructions on which weather tools to use and when to use them, the agent ignored them and just gave generic workout suggestions instead of checking the weather.
+
+A huge message wastes tokens if it is in every single message and it costs more. Skills only load when needed. Also, too many rules in one prompt can confuse the AI and the instructions can get mixed up. Skills keep the agent focused on one job at a time.
