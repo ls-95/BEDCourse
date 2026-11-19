@@ -4,7 +4,7 @@ import {
 	createPizza,
 	orderPizza,
 	sendOrder,
-} from "./pizzashop";
+} from "./pizzashop.js";
 
 describe("Pizza Shop Unit Tests", () => {
 	test("createPizza returns correct type and price for margherita", () => {

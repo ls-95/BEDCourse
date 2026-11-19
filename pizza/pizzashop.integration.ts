@@ -1,5 +1,5 @@
 import { describe, expect, test } from "vitest";
-import { orderPizza } from "./pizzashop";
+import { orderPizza } from "./pizzashop.js";
 
 describe("Pizza Shop Integration Test", () => {
 	test("should successfully complete a full margherita pizza order", () => {

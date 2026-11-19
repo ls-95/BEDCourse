@@ -1,5 +1,5 @@
 import { describe, expect, test } from "vitest";
-import { findLoan, markReturned } from "./returns";
+import { findLoan, markReturned } from "./returns.js";
 
 describe("Returns Unit Tests", () => {
 	test("findLoan finds the loan's title and member", () => {
