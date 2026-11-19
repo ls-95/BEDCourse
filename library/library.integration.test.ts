@@ -1,5 +1,5 @@
 import { describe, expect, test } from "vitest";
-import { borrowBook, borrowBooks, borrowWithLimit } from "./library";
+import { borrowBook, borrowBooks, borrowWithLimit } from "./library.js";
 
 describe("Borrow Book Integration Test", () => {
 	//borrowBook integration test
@@ -65,8 +65,8 @@ describe("Borrow Book Integration Test", () => {
 			booksOnLoan: 0,
 		});
 		expect(result).toHaveLength(2);
-		expect(result[0].title).toBe("dune");
-		expect(result[1].title).toBe("neuromancer");
+		expect(result[0]?.title).toBe("dune");
+		expect(result[1]?.title).toBe("neuromancer");
 	});
 
 	test("should successfully complete to throw an error when there are no titles", () => {

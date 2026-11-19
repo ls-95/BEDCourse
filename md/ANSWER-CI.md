@@ -42,3 +42,7 @@ Other possible reasons could be because of missing dependencies, different opera
 **Question:**
 
 It is better to know about the problem before the merge because then I can fix it on my branch. After merging, the broken code is already on the main branch and it is more complicated to fix.
+
+## Exercise 4
+
+![Typecheck Test](../screenshots/typecheck.png)

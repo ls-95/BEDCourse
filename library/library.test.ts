@@ -6,7 +6,7 @@ import {
 	checkOutBook,
 	findBook,
 	registerLoan,
-} from "./library";
+} from "./library.js";
 
 describe("Library Unit Tests", () => {
 	//findBook Unit Tests
@@ -122,10 +122,10 @@ describe("Library Unit Tests", () => {
 			membership: "premium",
 			booksOnLoan: 1,
 		});
-		expect(titles[0].title).toBe("dune");
-		expect(titles[0].memberId).toBe(7);
-		expect(titles[1].title).toBe("neuromancer");
-		expect(titles[1].memberId).toBe(7);
+		expect(titles[0]?.title).toBe("dune");
+		expect(titles[0]?.memberId).toBe(7);
+		expect(titles[1]?.title).toBe("neuromancer");
+		expect(titles[1]?.memberId).toBe(7);
 	});
 
 	test("borrowBooks lets a member borrow multiple books", () => {
@@ -135,10 +135,10 @@ describe("Library Unit Tests", () => {
 			membership: "premium",
 			booksOnLoan: 1,
 		});
-		expect(titles[0].title).toBe("dune");
-		expect(titles[0].memberId).toBe(5);
-		expect(titles[1].title).toBe("neuromancer");
-		expect(titles[1].memberId).toBe(5);
+		expect(titles[0]?.title).toBe("dune");
+		expect(titles[0]?.memberId).toBe(5);
+		expect(titles[1]?.title).toBe("neuromancer");
+		expect(titles[1]?.memberId).toBe(5);
 	});
 
 	test("borrowBooks throws an error when basic member wants to borrow too many books", () => {

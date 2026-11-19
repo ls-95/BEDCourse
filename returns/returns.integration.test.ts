@@ -1,5 +1,5 @@
 import { describe, expect, test } from "vitest";
-import { returnBook } from "./returns";
+import { returnBook } from "./returns.js";
 
 describe("Return Books Integration Test", () => {
 	test("returnBook(1001) returns a loan that is returned: true", () => {
