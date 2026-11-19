@@ -48,3 +48,8 @@ It is better to know about the problem before the merge because then I can fix i
 ![Typecheck Test](../screenshots/typecheck.png)
 
 ![Typecheck Test Fail On Purpose](../screenshots/typecheck-error-on-purpose.png)
+
+![Typecheck Test Fail On Purpose Fix](../screenshots/typecheck-error-on-purpose-fix.png)
+
+**Question:**
+
