@@ -46,3 +46,5 @@ It is better to know about the problem before the merge because then I can fix i
 ## Exercise 4
 
 ![Typecheck Test](../screenshots/typecheck.png)
+
+![Typecheck Test Fail On Purpose](../screenshots/typecheck-error-on-purpose.png)
