@@ -64,3 +64,10 @@ It is better to know about the problem before the merge because then I can fix i
 CI uses `npm ci` so every run uses the same versions on the computer. That makes the results the same every time.
 
 ![Pass - Node Versions](../screenshots/node-versions.png)
+
+## Exercise 6
+
+![Unable To Merge](../screenshots/unable-merge.png)
+
+CI runs the tests and reports pass or fail. But it cannot stop anyone from merging. It only gives information.
+When you add branch protection, it will block merging when CI fails and blocks direct pushes to the branch. So CI checks the code and the branch protection requires that the check passes.
