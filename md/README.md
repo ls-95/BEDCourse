@@ -1,0 +1,1 @@
+[![CI](https://github.com/ls-95/BEDCourse/actions/workflows/ci.yml/badge.svg?branch=week12%2Fci)](https://github.com/ls-95/BEDCourse/actions/workflows/ci.yml)

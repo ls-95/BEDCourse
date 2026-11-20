@@ -9,9 +9,6 @@ import {
 } from "./library.js";
 
 describe("Library Unit Tests", () => {
-	test("fails on purpose", () => {
-		expect(1).toBe(2);
-	});
 	//findBook Unit Tests
 	test("findBook accepts dune", () => {
 		const book = findBook("dune");
