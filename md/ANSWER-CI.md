@@ -53,3 +53,14 @@ It is better to know about the problem before the merge because then I can fix i
 
 **Question:**
 
+## Exercise 5
+
+**Questions:**
+
+`npm install` reads the package.json file and installs the packages. It can pick newer versions and change package-lock.json. 
+
+`npm ci` installs exactly the versions saved in package-lock.json. It starts fresh and never changes that file.
+
+CI uses `npm ci` so every run uses the same versions on the computer. That makes the results the same every time.
+
+![Pass - Node Versions](../screenshots/node-versions.png)
