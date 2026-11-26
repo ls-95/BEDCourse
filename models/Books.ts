@@ -17,12 +17,12 @@ const Book = sequelize.define(
 			type: DataTypes.STRING(50),
 			allowNull: false,
 		},
-		publishedYear: {
+		published_year: {
 			type: DataTypes.INTEGER,
 			allowNull: false,
 			field: "published_year",
 		},
-		authorId: {
+		author_id: {
 			type: DataTypes.INTEGER,
 			field: "author_id",
 		},

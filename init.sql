@@ -28,7 +28,8 @@ VALUES
     (4, 'Douglas Adams'),
     (5, 'Andy Weir'),
     (6, 'Shelby Van Pelt'),
-    (7, 'F.Scott Fitzgerald');
+    (7, 'F.Scott Fitzgerald'),
+    (8, 'George Orwell');
 
 -- UPDATE books
 -- SET author_id = 1
@@ -66,6 +67,10 @@ UPDATE books
 SET author_id = 3
 WHERE id = 4;
 
+UPDATE books
+SET author_id = 8
+WHERE id = 2;
+
 INSERT INTO books (title, genre, published_year, author_id)
 VALUES
 ('The Hitchhiker''s Guide to the Galaxy', 'science fiction', 1979, 4),
@@ -91,13 +96,13 @@ VALUES
 
 CREATE TABLE loans (
     id SERIAL PRIMARY KEY,
-    members_id INTEGER NOT NULL REFERENCES members(id),
-    books_id INTEGER NOT NULL REFERENCES books(id),
+    member_id INTEGER NOT NULL REFERENCES members(id),
+    book_id INTEGER NOT NULL REFERENCES books(id),
     loan_date TIMESTAMP NOT NULL DEFAULT NOW(),
     returned_at TIMESTAMP
 );
 
-INSERT INTO loans (members_id, books_id)
+INSERT INTO loans (member_id, book_id)
 VALUES
 (1, 1),
 (3, 8);

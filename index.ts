@@ -1,3 +1,4 @@
+import cors from "cors";
 import express from "express";
 import { ForeignKeyConstraintError } from "sequelize";
 import Author from "./models/Authors.ts";
@@ -6,25 +7,26 @@ import Loan from "./models/Loan.ts";
 import Member from "./models/Member.ts";
 import sequelize from "./sequelize.ts";
 
-Author.hasMany(Book, { foreignKey: "authorId" });
-Book.belongsTo(Author, { foreignKey: "authorId" });
+Author.hasMany(Book, { foreignKey: "author_id" });
+Book.belongsTo(Author, { foreignKey: "author_id" });
 Member.belongsToMany(Book, {
 	through: Loan,
-	foreignKey: "memberId",
-	otherKey: "bookId",
+	foreignKey: "member_id",
+	otherKey: "book_id",
 });
 Book.belongsToMany(Member, {
 	through: Loan,
-	foreignKey: "bookId",
-	otherKey: "memberId",
+	foreignKey: "book_id",
+	otherKey: "member_id",
 });
-Loan.belongsTo(Member, { foreignKey: "memberId" });
-Loan.belongsTo(Book, { foreignKey: "bookId" });
+Loan.belongsTo(Member, { foreignKey: "member_id" });
+Loan.belongsTo(Book, { foreignKey: "book_id" });
 
 const app = express();
 const port = Number(process.env.PORT);
 
 app.use(express.json());
+app.use(cors({ origin: "http://localhost:5173" }));
 
 const testDBConnection = async () => {
 	try {
@@ -142,7 +144,7 @@ app.get("/members/:id/loans", async (req, res) => {
 		}
 		const loans = await Loan.findAll({
 			where: {
-				memberId: id,
+				member_id: id,
 			},
 			include: [
 				{ model: Member, attributes: ["name"] },
@@ -170,7 +172,7 @@ app.get("/authors/:id/books", async (req, res) => {
 		}
 		const books = await Book.findAll({
 			where: {
-				authorId: id,
+				author_id: id,
 			},
 		});
 		res.status(200).json(books);
@@ -193,8 +195,8 @@ app.post("/books", async (req, res) => {
 		const book = await Book.create({
 			title,
 			genre,
-			publishedYear: published_year,
-			authorId: author_id,
+			published_year,
+			author_id,
 		});
 		res.json(book);
 	} catch (error) {
@@ -231,10 +233,10 @@ app.post("/loans", async (req, res) => {
 
 	try {
 		const loan = await Loan.create({
-			memberId: member_id,
-			bookId: book_id,
-			loanDate: loan_date,
-			returnedAt: returned_at,
+			member_id,
+			book_id,
+			loan_date,
+			returned_at,
 		});
 		res.json(loan);
 	} catch (error) {
@@ -266,8 +268,8 @@ app.put("/books/:id", async (req, res) => {
 		await book.update({
 			title,
 			genre,
-			publishedYear: published_year,
-			authorId: author_id,
+			published_year,
+			author_id,
 		});
 		res.json(book);
 	} catch (error) {
@@ -300,8 +302,8 @@ app.patch("/books/:id", async (req, res) => {
 		const changes: Record<string, unknown> = {};
 		if (title !== undefined) changes.title = title;
 		if (genre !== undefined) changes.genre = genre;
-		if (published_year !== undefined) changes.publishedYear = published_year;
-		if (author_id !== undefined) changes.authorId = author_id;
+		if (published_year !== undefined) changes.published_year = published_year;
+		if (author_id !== undefined) changes.author_id = author_id;
 
 		await book.update(changes);
 

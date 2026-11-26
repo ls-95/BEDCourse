@@ -9,23 +9,23 @@ const Loan = sequelize.define(
 			primaryKey: true,
 			autoIncrement: true,
 		},
-		memberId: {
+		member_id: {
 			type: DataTypes.INTEGER,
 			field: "members_id",
 			allowNull: false,
 		},
-		bookId: {
+		book_id: {
 			type: DataTypes.INTEGER,
 			field: "books_id",
 			allowNull: false,
 		},
-		loanDate: {
+		loan_date: {
 			type: DataTypes.DATE,
 			defaultValue: DataTypes.NOW,
 			field: "loan_date",
 			allowNull: false,
 		},
-		returnedAt: {
+		returned_at: {
 			type: DataTypes.DATE,
 			field: "returned_at",
 		},
