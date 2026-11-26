@@ -44,7 +44,7 @@ function App() {
 	}, []);
 
 	const handleSubmit = async (event: React.SubmitEvent<HTMLFormElement>) => {
-		//event.preventDefault();
+		event.preventDefault();
 
 		const result = bookFormSchema.safeParse({
 			title,
