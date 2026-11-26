@@ -15,4 +15,4 @@ I took a screenshot but it was an error of the wrong port (I used 3001 instead o
 
 CORS is a safety check that the browser does. The client (localhost:5173) asked the API (localhost:3001) for data. The browser saw two different addresses and asked the API if it was allowed. The API had not said yes yet, so the browser blocked the request. Insomnia is not a browser, so it does not do this check.
 
-If any origin is allowed, any website can use my API. With one origin, only the client is allowed. When the frontend is put online, then the origin would be the real web address of the site. 
+If any origin is allowed, any website can use my API. With one origin, only the client is allowed. When the frontend is put online, then the origin would need to be changed to the real web address of the site.
