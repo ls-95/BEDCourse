@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { z } from "zod";
 import { bookFormSchema } from "./schemas";
 
@@ -28,20 +28,20 @@ function App() {
 		{},
 	);
 
-	const fetchBooks = async () => {
+	const fetchBooks = useCallback(async () => {
 		const response = await axios.get("http://localhost:3001/books");
 		setBooks(response.data);
-	};
+	}, []);
 
-	const fetchAuthors = async () => {
+	const fetchAuthors = useCallback(async () => {
 		const response = await axios.get("http://localhost:3001/authors");
 		setAuthors(response.data);
-	};
+	}, []);
 
 	useEffect(() => {
 		fetchBooks();
 		fetchAuthors();
-	}, []);
+	}, [fetchBooks, fetchAuthors]);
 
 	const handleSubmit = async (event: React.SubmitEvent<HTMLFormElement>) => {
 		event.preventDefault();
