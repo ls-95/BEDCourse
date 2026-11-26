@@ -24,6 +24,7 @@ function App() {
 	const [genre, setGenre] = useState("");
 	const [publishedYear, setPublishedYear] = useState("");
 	const [authorId, setAuthorId] = useState("");
+	const [deleteError, setDeleteError] = useState("");
 	const [errors, setErrors] = useState<Record<string, string[] | undefined>>(
 		{},
 	);
@@ -68,23 +69,45 @@ function App() {
 		setAuthorId("");
 	};
 
+	const handleDelete = async (id: number) => {
+		if (!window.confirm("Are you sure?")) {
+			return;
+		}
+
+		try {
+			await axios.delete(`http://localhost:3001/books/${id}`);
+			setBooks(books.filter((book) => book.id !== id));
+			setDeleteError("");
+		} catch (error) {
+			setDeleteError("This book can't be deleted. It may be on loan.");
+		}
+	};
+
 	return (
 		<div>
 			<h1>Library</h1>
 			<p className="book-text">{books.length} books in the library</p>
 			<div className="books">
-				<h2>Books</h2>
-				<ul>
+				<h2 className="left-header">Books</h2>
+				<ul className="books-list">
 					{books.map((book) => (
 						<li key={book.id}>
-							{book.title} by {book.Author?.name} ({book.published_year})
+							{book.title} - {book.Author?.name} ({book.published_year})
+							<button
+								className="delete"
+								type="button"
+								onClick={() => handleDelete(book.id)}
+							>
+								Delete
+							</button>
 						</li>
 					))}
 				</ul>
+				{deleteError && <p className="error">{deleteError}</p>}
 			</div>
 			<div className="authors">
-				<h2>Authors</h2>
-				<ul>
+				<h2 className="left-header">Authors</h2>
+				<ul className="author-list">
 					{authors.map((author) => (
 						<li key={author.id}>{author.name}</li>
 					))}

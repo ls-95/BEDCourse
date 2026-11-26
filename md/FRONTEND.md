@@ -35,3 +35,13 @@ If the user typed the `author_id` by hand, the wrong id could be entered that do
 If someone changes the rules in one place but forgets the other, the client and the API disagree. The form could accept a book that the API rejects or the other way around. Keeping the rules in one place would avoid this and a shared file for both could help.
 
 ![Network](../screenshots/frontend/network.png)
+
+## Exercise 5
+
+`filter` goes throught the books one by one. For each book, it checks if `book.id !== id` is true. If it is true, the book is kept. If it is false (the book deleted), it will be left out. The result is a new array without the deleted book.
+
+![Delete Loan](../screenshots/frontend/delete-loan.png)
+
+The book was not deleted. The database doesnt not allow a book to be deleted while a loan points to it. The API got an error and sent back a 500 error. The code stopped before it removed the book from the page, so the book stayed in the list. Nothing on the page told the user what went wrong.
+
+![Delete Loan Message](../screenshots/frontend/delete-loan-message.png)

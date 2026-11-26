@@ -52,7 +52,7 @@ body {
 
 #root {
 	padding: 2em 0;
-	width: 1126px;
+	width: 650px;
 	max-width: 100%;
 	text-align: center;
 	margin: 0 auto;
@@ -73,23 +73,15 @@ h2 {
 h1 {
 	font-size: 56px;
 	letter-spacing: -1.68px;
-	margin: 32px 0;
-	@media (max-width: 1024px) {
-		font-size: 36px;
-		margin: 20px 0;
-	}
+	margin: 1em 0;
 }
+
 h2 {
-	font-size: 24px;
+	font-size: 32px;
 	line-height: 118%;
 	letter-spacing: -0.24px;
 	margin: 0 0 8px;
-	@media (max-width: 1024px) {
-		font-size: 20px;
-	}
-}
-p {
-	margin: 0;
+	color: palegoldenrod;
 }
 
 code {
@@ -100,8 +92,9 @@ code {
 }
 
 .books,
-.book-text {
-	margin: 2em 0;
+.book-text,
+.authors {
+	margin: 4em 0;
 }
 
 .book-text {
@@ -112,8 +105,25 @@ code {
 	margin: 0 auto;
 }
 
-ul li {
+ul {
+	padding-left: 0;
+}
+
+.books-list,
+.author-list,
+.left-header {
+	text-align: left;
+}
+
+.books-list > li {
+	display: flex;
+	justify-content: space-between;
+}
+
+.author-list > li,
+.books-list > li {
 	list-style: none;
+	padding: 0.25em 0;
 }
 
 .post {
@@ -150,11 +160,19 @@ form > button {
 	margin: 2em auto;
 }
 
-form > button:active {
+form > button:active,
+.delete {
 	position: relative;
 	top: 2px;
 }
 
 .error {
 	color: rgb(249, 99, 99);
+}
+
+.delete {
+	background-color: rgb(249, 99, 99);
+	border: rgb(249, 99, 99);
+	border-radius: 5px;
+	cursor: pointer;
 }
