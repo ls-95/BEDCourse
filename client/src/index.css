@@ -51,11 +51,11 @@ body {
 }
 
 #root {
+	padding: 2em 0;
 	width: 1126px;
 	max-width: 100%;
 	text-align: center;
 	margin: 0 auto;
-	border-inline: 1px solid var(--border);
 	min-height: 100svh;
 	display: flex;
 	flex-direction: column;
@@ -106,8 +106,55 @@ code {
 
 .book-text {
 	color: palegoldenrod;
+	border: 1px solid palegoldenrod;
+	padding: 1em;
+	max-width: 225px;
+	margin: 0 auto;
 }
 
 ul li {
 	list-style: none;
+}
+
+.post {
+	border: 1px solid palegoldenrod;
+	padding: 1em;
+}
+
+form {
+	display: flex;
+	flex-direction: column;
+}
+
+form > label {
+	margin-top: 1em;
+}
+
+form > input {
+	width: 250px;
+	margin: 0 auto;
+}
+
+form > button {
+	cursor: pointer;
+	background-color: palegoldenrod;
+	color: #08060d;
+	border: 1px solid palegoldenrod;
+	padding: 5px 0;
+	border-radius: 5px;
+}
+
+form > select,
+form > button {
+	width: 258px;
+	margin: 2em auto;
+}
+
+form > button:active {
+	position: relative;
+	top: 2px;
+}
+
+.error {
+	color: rgb(249, 99, 99);
 }

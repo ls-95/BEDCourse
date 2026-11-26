@@ -22,3 +22,16 @@ If any origin is allowed, any website can use my API. With one origin, only the 
 React uses key to know which item in the list is which. `book.id` is unique and never changes. `index` is just the positionm, so if a book is deleted, the books under will get a new index as they move up a position. Items can then get mixed up.
 
 `useState` stores the books in the component. When the books change, the page updates. `useEffect` runs code when the page loads. Here it gets the books from the API. Without `[]`, it runs again every time the page updates. Getting the books updates the page so it get the books again and again ..etc.
+
+# Medium
+
+## Exercise 4
+
+A form normally reloads the page when you submit it. `event.preventDefault()` stops that. Without it, the book still gets added but the page reloads.
+
+The database links a book to an author with the id so the API needs the id. Names can be spelled in different ways but the id is always the same.
+If the user typed the `author_id` by hand, the wrong id could be entered that doesn't match the author or that doesn't exist.
+
+If someone changes the rules in one place but forgets the other, the client and the API disagree. The form could accept a book that the API rejects or the other way around. Keeping the rules in one place would avoid this and a shared file for both could help.
+
+![Network](../screenshots/frontend/network.png)
