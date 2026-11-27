@@ -1,3 +1,4 @@
+/* Variables/page defaults */
 :root {
 	--text: #6b6375;
 	--text-h: #08060d;
@@ -46,13 +47,14 @@
 	}
 }
 
+/* Base elements */
 body {
 	margin: 0;
 }
 
 #root {
 	padding: 2em 0;
-	width: 650px;
+	width: 800px;
 	max-width: 100%;
 	text-align: center;
 	margin: 0 auto;
@@ -91,6 +93,11 @@ code {
 	background: var(--code-bg);
 }
 
+ul {
+	padding-left: 0;
+}
+
+/* Sections */
 .books,
 .book-text,
 .authors {
@@ -103,16 +110,23 @@ code {
 	padding: 1em;
 	max-width: 225px;
 	margin: 0 auto;
+	font-style: italic;
 }
 
-ul {
-	padding-left: 0;
-}
-
-.books-list,
-.author-list,
 .left-header {
 	text-align: left;
+}
+
+/* Lists */
+.books-list,
+.author-list {
+	text-align: left;
+}
+
+.books-list > li,
+.author-list > li {
+	list-style: none;
+	padding: 0.25em 0;
 }
 
 .books-list > li {
@@ -120,59 +134,140 @@ ul {
 	justify-content: space-between;
 }
 
-.author-list > li,
-.books-list > li {
-	list-style: none;
-	padding: 0.25em 0;
-}
-
+/* Add book form */
 .post {
 	border: 1px solid palegoldenrod;
 	padding: 1em;
 }
 
-form {
+.add-form {
 	display: flex;
 	flex-direction: column;
 }
 
-form > label {
+.add-form > label {
 	margin-top: 1em;
+	font-style: italic;
+	color: palegoldenrod;
+	opacity: 0.8;
 }
 
-form > input {
-	width: 250px;
+.add-form > input {
+	width: 330px;
 	margin: 0 auto;
+	padding: 10px 15px;
+	border: none;
+	border-radius: 10px;
 }
 
-form > button {
-	cursor: pointer;
+.add-form > select {
+	width: 350px;
+	margin: 0 auto;
+	padding: 10px 15px;
+	border: none;
+	border-radius: 10px;
+}
+
+.add-form > button {
+	width: 350px;
+	margin: 2em auto;
+	padding: 15px 0;
+	border: none;
+	border-radius: 10px;
 	background-color: palegoldenrod;
 	color: #08060d;
-	border: 1px solid palegoldenrod;
-	padding: 5px 0;
-	border-radius: 5px;
+	cursor: pointer;
 }
 
-form > select,
-form > button {
-	width: 258px;
-	margin: 2em auto;
-}
-
-form > button:active,
+/* Edit/delete (book list) */
+.edit,
 .delete {
-	position: relative;
-	top: 2px;
+	min-width: 75px;
+	padding: 7px 15px;
+	border-radius: 10px;
+	cursor: pointer;
 }
 
-.error {
-	color: rgb(249, 99, 99);
+.edit {
+	background-color: palegoldenrod;
+	border: palegoldenrod;
+	color: #08060d;
+	margin-right: 1px;
 }
 
 .delete {
 	background-color: rgb(249, 99, 99);
 	border: rgb(249, 99, 99);
-	border-radius: 5px;
+}
+
+.add-form > button:active,
+.edit:active,
+.delete:active {
+	position: relative;
+	top: 2px;
+}
+
+/* Edit book form */
+.edit-form {
+	border: 1px solid palegoldenrod;
+	padding: 1em;
+}
+
+.edit-form > h3 {
+	margin: 0.5em;
+	color: #fff;
+}
+
+.edit-form-inner {
+	display: flex;
+	flex-direction: column;
+}
+
+.edit-label {
+	font-style: italic;
+	font-size: 0.75em;
+	color: palegoldenrod;
+	opacity: 0.85;
+	margin-bottom: -5px;
+}
+
+.edit-input,
+.edit-select {
+	min-width: 330px;
+	margin: 1px 0;
+	padding: 10px 15px;
+	border: none;
+	border-radius: 10px;
+}
+
+/* Save/Cancel (edit form)  */
+.edit-btn-container {
+	display: flex;
+	justify-content: end;
+	margin-top: 0.75em;
+}
+
+.edit-btn-container > button {
 	cursor: pointer;
+	padding: 7px 15px;
+	border-radius: 10px;
+	margin-right: 0.5em;
+}
+
+.save-btn {
+	background-color: palegreen;
+	border: 1px solid palegreen;
+	color: #08060d;
+	margin-bottom: 2px;
+}
+
+.cancel-btn {
+	background-color: rgb(249, 99, 99);
+	border: 1px solid rgb(249, 99, 99);
+	color: #fff;
+}
+
+/* Error */
+.error {
+	color: rgb(249, 99, 99);
 }

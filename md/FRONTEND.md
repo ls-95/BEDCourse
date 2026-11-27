@@ -45,3 +45,9 @@ If someone changes the rules in one place but forgets the other, the client and 
 The book was not deleted. The database doesnt not allow a book to be deleted while a loan points to it. The API got an error and sent back a 500 error. The code stopped before it removed the book from the page, so the book stayed in the list. Nothing on the page told the user what went wrong.
 
 ![Delete Loan Message](../screenshots/frontend/delete-loan-message.png)
+
+## Exercise 6
+
+`PUT` replaces the whole book, so it needs all the fields. `PATCH` only changes specific fields the user wants to change. If the user forgets 'genre' in `PUT`, the API sends back a 400 error and nothing is changed. With `PATCH`, nothing goes wrong. The API only changes the fields that are sent, and the genre stays the same.
+
+The edit form shows all the fields of the book and sends them all. So the form fits `PUT` which needs all the fields. `PATCH` would fit better on a button that changes only one thing, like a button that would change the genre of the book, or adding a mark as returned button on a loan.
