@@ -34,8 +34,6 @@ describe("E1 · GET /api/menu", () => {
 });
 
 describe("E2 · POST /api/menu", () => {
-	it.todo("creates a dish and returns 201");
-
 	it("creates a dish and returns 201", async () => {
 		const res = await request(app)
 			.post("/api/menu")
@@ -55,42 +53,6 @@ describe("E2 · POST /api/menu", () => {
 		expect(res.status).toBe(200);
 		expect(res.body).toHaveLength(5);
 	});
-
-	// it("400 for a negative price", async () => {
-	// 	const res = await request(app).post("/api/menu").send({
-	// 		name: "Soup",
-	// 		price: -5,
-	// 		category: "STARTER",
-	// 	});
-	// 	expect(res.status).toBe(400);
-	// });
-
-	// it("400 for a price sent as text ( '210' )", async () => {
-	// 	const res = await request(app).post("/api/menu").send({
-	// 		name: "Soup",
-	// 		price: "210",
-	// 		category: "STARTER",
-	// 	});
-	// 	expect(res.status).toBe(400);
-	// });
-
-	// it("400 for a price with decimals", async () => {
-	// 	const res = await request(app).post("/api/menu").send({
-	// 		name: "Soup",
-	// 		price: 222.5,
-	// 		category: "STARTER",
-	// 	});
-	// 	expect(res.status).toBe(400);
-	// });
-
-	// it("400 for an unknown category", async () => {
-	// 	const res = await request(app).post("/api/menu").send({
-	// 		name: "Soup",
-	// 		price: 222.5,
-	// 		category: "DINNER",
-	// 	});
-	// 	expect(res.status).toBe(400);
-	// });
 
 	it.each([
 		["a negative price", { price: -5 }, "price"],
@@ -120,5 +82,81 @@ describe("E2 · POST /api/menu", () => {
 });
 
 describe("E3 · GET /api/menu with filters", () => {
-	it.todo("filters by category");
+	it("?category=MAIN returns only main courses", async () => {
+		const res = await request(app).get("/api/menu?category=MAIN");
+
+		expect(res.status).toBe(200);
+		expect(res.body).toEqual([
+			{
+				id: 2,
+				name: "Grilled Arctic Char",
+				price: 295,
+				category: "MAIN",
+				vegetarian: false,
+			},
+			{
+				id: 3,
+				name: "Mushroom Risotto",
+				price: 245,
+				category: "MAIN",
+				vegetarian: true,
+			},
+		]);
+	});
+
+	it("?vegetarian=true returns only vegetarian dishes", async () => {
+		const res = await request(app).get("/api/menu?vegetarian=true");
+
+		expect(res.status).toBe(200);
+		expect(res.body).toEqual([
+			{
+				id: 3,
+				name: "Mushroom Risotto",
+				price: 245,
+				category: "MAIN",
+				vegetarian: true,
+			},
+			{
+				id: 4,
+				name: "Cloudberry Parfait",
+				price: 125,
+				category: "DESSERT",
+				vegetarian: true,
+			},
+		]);
+	});
+
+	it("/api/menu?category=MAIN&vegetarian=true returns main courses that are vegetarian", async () => {
+		const res = await request(app).get(
+			"/api/menu?category=MAIN&vegetarian=true",
+		);
+
+		expect(res.status).toBe(200);
+		expect(res.body).toEqual([
+			{
+				id: 3,
+				name: "Mushroom Risotto",
+				price: 245,
+				category: "MAIN",
+				vegetarian: true,
+			},
+		]);
+	});
+
+	it("A filter that matches nothing returns 200 with an empty list", async () => {
+		const res = await request(app).get(
+			"/api/menu?category=STARTER&vegetarian=true",
+		);
+		expect(res.status).toBe(200);
+		expect(res.body).toEqual([]);
+	});
+
+	it.each([
+		["an unknown category", "category=SNACK"],
+		["a vegetarian value that is not true or false", "vegetarian=yes"],
+	])("rejects %s with 400", async (_label, query) => {
+		const res = await request(app).get(`/api/menu?${query}`);
+
+		expect(res.status).toBe(400);
+	});
 });
