@@ -17,9 +17,30 @@ type Author = {
 	name: string;
 };
 
+type Member = {
+	id: number;
+	name: string;
+};
+
+type Loan = {
+	id: number;
+	member_id: number;
+	book_id: number;
+	loan_date: string;
+	returned_at: number | null;
+	Member: {
+		name: string;
+	};
+	Book: {
+		title: string;
+	};
+};
+
 function App() {
 	const [books, setBooks] = useState<Book[]>([]);
 	const [authors, setAuthors] = useState<Author[]>([]);
+	const [members, setMembers] = useState<Member[]>([]);
+	const [loans, setLoans] = useState<Loan[]>([]);
 	const [title, setTitle] = useState("");
 	const [genre, setGenre] = useState("");
 	const [publishedYear, setPublishedYear] = useState("");
@@ -44,10 +65,22 @@ function App() {
 		setAuthors(response.data);
 	}, []);
 
+	const fectchMembers = useCallback(async () => {
+		const response = await axios.get("http://localhost:3001/members");
+		setMembers(response.data);
+	}, []);
+
+	const fectchLoans = useCallback(async () => {
+		const response = await axios.get("http://localhost:3001/loans");
+		setLoans(response.data);
+	}, []);
+
 	useEffect(() => {
 		fetchBooks();
 		fetchAuthors();
-	}, [fetchBooks, fetchAuthors]);
+		fectchMembers();
+		fectchLoans();
+	}, [fetchBooks, fetchAuthors, fectchMembers, fectchLoans]);
 
 	const handleSubmit = async (event: React.SubmitEvent<HTMLFormElement>) => {
 		event.preventDefault();
@@ -232,15 +265,38 @@ function App() {
 				</ul>
 				{deleteError && <p className="error">{deleteError}</p>}
 			</div>
-			<div className="authors">
-				<h2 className="left-header">Authors</h2>
-				<ul className="author-list">
-					{/* Authors List */}
-					{authors.map((author) => (
-						<li key={author.id}>{author.name}</li>
+			<div className="authors-members">
+				<div className="authors">
+					<h2 className="left-header">Authors</h2>
+					<ul className="author-list">
+						{/* Authors List */}
+						{authors.map((author) => (
+							<li key={author.id}>{author.name}</li>
+						))}
+					</ul>
+				</div>
+				<div className="members">
+					<h2 className="left-header">Members</h2>
+					<ul className="member-list">
+						{/* Members List */}
+						{members.map((member) => (
+							<li key={member.id}>{member.name}</li>
+						))}
+					</ul>
+				</div>
+			</div>
+			<div className="loans">
+				<h2 className="left-header">Loans</h2>
+				<ul className="loan-list">
+					{/* Loans List */}
+					{loans.map((loan) => (
+						<li key={loan.id}>
+							{loan.Member.name} borrowed {loan.Book.title}
+						</li>
 					))}
 				</ul>
 			</div>
+
 			{/* Add Book Form */}
 			<div className="post">
 				<h2>Add Book</h2>

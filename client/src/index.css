@@ -100,7 +100,8 @@ ul {
 /* Sections */
 .books,
 .book-text,
-.authors {
+.authors,
+.members {
 	margin: 4em 0;
 }
 
@@ -119,25 +120,36 @@ ul {
 
 /* Lists */
 .books-list,
-.author-list {
+.author-list,
+.member-list,
+.loan-list {
 	text-align: left;
 }
 
 .books-list > li,
-.author-list > li {
+.author-list > li,
+.member-list > li,
+.loan-list > li {
 	list-style: none;
 	padding: 0.25em 0;
 }
 
-.books-list > li {
+.books-list > li,
+.authors-members {
 	display: flex;
 	justify-content: space-between;
+}
+
+.authors,
+.members {
+	flex: 1;
 }
 
 /* Add book form */
 .post {
 	border: 1px solid palegoldenrod;
 	padding: 1em;
+	margin-top: 3em;
 }
 
 .add-form {
